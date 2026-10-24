@@ -63,10 +63,10 @@ const template = await fs.readFile(path.join(root, 'index.html'), 'utf8');
 const pattern = /(<script id="embedded-demo-data" type="application\/json">)([\s\S]*?)(<\/script>)/;
 if (!pattern.test(template)) throw new Error('index.html 中未找到示例数据容器，无法嵌入');
 
-const serialized = escapeForScript(JSON.stringify({ ...payload, label: '真实订单数据 · 来自麦当劳 MCP' }));
+const serialized = escapeForScript(JSON.stringify({ ...payload, label: 'MCP 数据 · 本地脱敏展示' }));
 const generated = template
   .replace(pattern, (_, open, _body, close) => `${open}${serialized}${close}`)
-  .replace('交互演示 · 示例数据非实时', '真实订单数据 · 来自麦当劳 MCP')
+  .replace('交互演示 · 示例数据非实时', 'MCP 数据 · 本地脱敏展示')
   .replace('<title>MCD w/Work｜关怀小结</title>', '<title>MCD w/Work｜关怀小结 · MCP 订单</title>');
 
 if (flags.has('--check')) {
@@ -83,4 +83,4 @@ if (!flags.has('--force') && await fs.stat(outputPath).then(() => true, () => fa
 
 await fs.writeFile(outputPath, generated, 'utf8');
 console.log(`已嵌入 ${payload.orders.length} 笔 MCP 订单 -> ${outputPath}`);
-console.log('页面已在数据嵌入时标注“真实订单数据 · 来自麦当劳 MCP”，无参数打开即可查看。');
+console.log('页面已在数据嵌入时标注“MCP 数据 · 本地脱敏展示”，无参数打开即可查看。');

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "source": "mcp",
-  "label": "真实订单数据 · 来自麦当劳 MCP",
+  "label": "MCP 数据结构示例 · 虚构数据",
   "generatedAt": "2026-10-24T22:55:00+08:00",
   "currency": "CNY",
   "fieldNotes": {

@@ -200,7 +200,7 @@ agent_created: true
 
 1. 把本次 MCP 数据整理为符合页面结构的 JSON（必须含 `"source": "mcp"`、`generatedAt`，以及订单的 `id`、`status`、`createdAt`、`totalPaidCents`、`items[].name`、`items[].quantity`），先写入临时文件（如 `examples/care-summary.<日期>.json`）。
 2. 在项目根目录执行 `node scripts/embed-mcp-data.mjs <数据.json> --out <输出.html>`，脚本会把数据安全转义后写入页面模板的 `#embedded-demo-data` 容器，并同步来源标识与标题。默认输出为数据文件旁的 `care-summary.mcp.html`，已存在时不覆盖（需 `--force`）。
-3. 打开生成的 HTML 即可看到真实订单：页面无参数读取内嵌数据，显示“真实订单数据 · 来自麦当劳 MCP”和生成时间，`index.html` 本身保持示例演示用途。脚本会拒绝未脱敏的手机号、Token、券码及 `authorization`、`phone`、`address` 等字段。
+3. 打开生成的 HTML 即可看到用户授权的订单数据：页面无参数读取内嵌数据，显示“MCP 数据 · 本地脱敏展示”和生成时间，`index.html` 本身保持示例演示用途。脚本会拒绝未脱敏的手机号、Token、券码及 `authorization`、`phone`、`address` 等字段。
 4. 交付前用 `--check` 复核：`node scripts/embed-mcp-data.mjs <数据.json> --out <输出.html> --check`，并与页面显示的订单笔数、合计金额对照。
 5. 若当前环境无法执行脚本，才退回手工方式：将 JSON 安全转义（`</` → `<\/`、`<!--` → `<\u0021--`）后替换 `index.html` 中的 `#embedded-demo-data` 内容；或使用 `index.html?source=<相对路径>.json`（需要 HTTP 环境）。不得跳过转义直接拼接。
 
@@ -211,7 +211,7 @@ agent_created: true
 3. 修改 `examples/care-summary.demo.json` 后，运行 `node scripts/embed-demo.mjs` 同步内嵌示例，并用 `--check` 确认与 JSON 一致。
 4. 页面以“这一餐”为默认视图，展示餐品、实付金额、真实存在的优惠字段和一句温柔总结；“最近小结”展示订单笔数、这 N 笔合计金额、重复餐品及次数。
 5. 文案遵守本项目性格规则：不评价食物好坏、不贴人格标签、不使用“热量超标”“应该自律”，不根据订单推断职业、情绪、健康、收入或生活状态。每条偏好结论都必须能在真实数据中找到依据，无依据就不写。
-6. 页面上必须有清晰的数据来源标识：真实数据标注“真实订单数据 · 来自麦当劳 MCP”及生成时间；示例或演示数据必须标注“交互演示 · 示例数据非实时”。
+6. 页面上必须有清晰的数据来源标识：用户授权的订单数据标注“MCP 数据 · 本地脱敏展示”及生成时间；示例或演示数据必须标注“交互演示 · 示例数据非实时”。
 7. 不虚构“实时配送进度”。页面仅展示查询时刻的订单状态，若需提醒后续变化，说明以 MCP 时间为准。
 
 ### 分享与导出
@@ -243,7 +243,7 @@ MCP Token 无效、已过期或未提供。停止依赖授权的后续调用，�
 ## 参考资源
 
 - 页面演示数据：`examples/care-summary.demo.json`，完全虚构，用于交互演示。
-- MCP 真实数据样例：`examples/care-summary.mcp.sample.json`，展示 `source: "mcp"`、`generatedAt` 与缺失营养字段的处理方式，均为脱敏示例值。
+- 页面数据结构示例：`examples/care-summary.mcp.sample.json`，展示 `source: "mcp"`、`generatedAt` 与缺失营养字段的处理方式；内容均为虚构示例值，不是真实订单。
 - 嵌入脚本：`scripts/embed-mcp-data.mjs`（真实数据 → 独立 HTML，含脱敏校验与 `--check`）；`scripts/embed-demo.mjs`（同步示例数据到 `index.html`）。
 
 ## 推荐回复结构

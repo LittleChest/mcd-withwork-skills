@@ -1,0 +1,17 @@
+# Local credentials and environment files
+.env
+.env.*
+!.env.example
+
+# Generated pages containing real order data
+care-summary.mcp.html
+**/care-summary.mcp.html
+examples/care-summary.*.json
+!examples/care-summary.demo.json
+!examples/care-summary.mcp.sample.json
+
+# Local tooling and project metadata
+.workbuddy/
+node_modules/
+.DS_Store
+Thumbs.db

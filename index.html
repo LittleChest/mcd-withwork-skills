@@ -351,7 +351,10 @@
     </section>
   </main>
 
-  <footer class="shell footer">统计是看见记录，不是评价自己。</footer>
+  <footer class="shell footer">
+    <span>个人参赛作品，非麦当劳官方产品。餐品、价格与供应状态以麦当劳官方渠道为准。</span><br>
+    <span>统计是看见记录，不是评价自己。</span>
+  </footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script id="embedded-demo-data" type="application/json">{
@@ -749,10 +752,8 @@
         return periodForTimestamp(parseOrderTimestamp(order.createdAt));
       }
 
-      // 时段统计优先使用完成时间；为兼容只有点餐时间的订单，才回退到 createdAt。
+      // 时段统计严格使用点餐时间 createdAt；完成时间只用于展示，不参与归类。
       function statsTimeForOrder(order) {
-        const completed = parseOrderTimestamp(order.completedAt);
-        if (completed !== null) return { milliseconds: completed, source: "completedAt" };
         const created = parseOrderTimestamp(order.createdAt);
         if (created !== null) return { milliseconds: created, source: "createdAt" };
         return { milliseconds: null, source: null };
@@ -858,7 +859,7 @@
 
       function sourceMeta() {
         return state.data.source === "mcp"
-          ? { kicker: "这一餐 · MCP 订单记录", recentKicker: "最近小结 · MCP 订单记录", badge: "真实订单数据 · 来自麦当劳 MCP", fake: false }
+          ? { kicker: "这一餐 · MCP 订单记录", recentKicker: "最近小结 · MCP 订单记录", badge: "MCP 数据 · 本地脱敏展示", fake: false }
           : { kicker: "这一餐 · 示例记录", recentKicker: "最近小结 · 示例记录", badge: "交互演示 · 示例数据非实时", fake: true };
       }
 
@@ -1027,7 +1028,7 @@
         }
 
         const excluded = state.data.orders.length - validOrders().length;
-        panel.append(element("p", "exclusion-note", `已排除 ${excluded} 笔非有效记录。取消、失败、退款订单均不计入；以上金额均为这 ${summary.count} 笔订单的合计，不代表月度或年度总额。时段统计按完成时间优先归类，完成时间缺失时才使用可识别点餐时间。`));
+        panel.append(element("p", "exclusion-note", `已排除 ${excluded} 笔非有效记录。取消、失败、退款订单均不计入；以上金额均为这 ${summary.count} 笔订单的合计，不代表月度或年度总额。时段统计按北京时间下的点餐时间归类；点餐时间缺失的记录不参与时段占比。`));
       }
 
       function setView(view, focusTab = false) {
@@ -1059,7 +1060,7 @@
         } catch (error) {
           const wrapped = element("div", "card-head");
           const text = element("div");
-          text.append(element("p", "card-kicker", "数据载入失败"), element("h2", "card-title", "没有读到真实订单数据"));
+          text.append(element("p", "card-kicker", "数据载入失败"), element("h2", "card-title", "没有读到 MCP 订单数据"));
           wrapped.append(text, lampSvg());
           const hint = location.protocol === "file:" ? "直接双击打开时浏览器会拦截读取本地文件。可点击下方“载入本地 JSON”选择文件，或在项目目录运行 python3 -m http.server 后访问带 source 参数的地址。" : "";
           const fallback = element("button", "secondary-button", "改为查看内嵌示例记录");
@@ -1071,7 +1072,7 @@
           $("#panel-recent").hidden = true;
           $("#panel-recent").replaceChildren();
           document.querySelectorAll("[data-view]").forEach((tab) => { tab.disabled = true; });
-          $("#demo-badge").textContent = "未能载入真实订单数据";
+          $("#demo-badge").textContent = "未能载入 MCP 订单数据";
           $("#demo-badge").classList.remove("is-live");
           $("#export-button").disabled = true;
           return "failed";
@@ -1227,7 +1228,7 @@
         ctx.fillStyle = "rgba(242,201,109,.18)";
         ctx.beginPath(); ctx.arc(920, 130, 105, 0, Math.PI * 2); ctx.fill();
 
-        const badgeText = sourceMeta().fake ? "交互演示 · 示例数据非实时" : "真实订单数据 · 来自麦当劳 MCP";
+        const badgeText = sourceMeta().fake ? "交互演示 · 示例数据非实时" : "MCP 数据 · 本地脱敏展示";
         ctx.fillStyle = "#795b46";
         ctx.font = `700 30px ${font}`;
         ctx.fillText("MCD w/Work｜关怀小结", 92, 112);
