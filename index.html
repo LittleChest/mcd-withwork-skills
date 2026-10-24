@@ -1,0 +1,1108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f6f0e6">
+  <title>MCD w/Work｜关怀小结</title>
+  <style>
+    :root {
+      --cream: #f6f0e6;
+      --paper: #fffaf2;
+      --paper-deep: #f1e5d5;
+      --ink: #493b32;
+      --muted: #806f61;
+      --brown: #795b46;
+      --apricot: #e8b78f;
+      --apricot-soft: #f5dfca;
+      --yellow: #f2c96d;
+      --line: #e7dac9;
+      --shadow: 0 18px 50px rgba(91, 67, 44, .09);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { min-width: 0; background: var(--cream); }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, select, input { font: inherit; }
+    button, select { -webkit-tap-highlight-color: transparent; }
+    button { color: inherit; }
+    button:focus-visible, select:focus-visible, input:focus-visible {
+      outline: 3px solid rgba(121, 91, 70, .28);
+      outline-offset: 3px;
+    }
+    [hidden] { display: none !important; }
+    .shell { width: min(100% - 32px, 1120px); margin: 0 auto; }
+    .topbar {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      padding: 16px 0 10px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
+    .brand-name { font-weight: 700; letter-spacing: .01em; font-size: 15px; }
+    .lamp-mark { width: 30px; height: 34px; flex: 0 0 auto; }
+    .demo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      max-width: 100%;
+      padding: 5px 11px;
+      border: 1px solid #dfcdb8;
+      border-radius: 999px;
+      color: var(--brown);
+      background: rgba(255, 250, 242, .65);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.5;
+      white-space: normal;
+    }
+    .demo-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); flex: 0 0 auto; }
+    .demo-badge.is-live { border-color: #cdb79f; background: #fbf3e6; }
+    .layout { display: grid; gap: 26px; padding: 22px 0 34px; align-items: start; }
+    .intro { min-width: 0; padding: 8px 2px; }
+    .eyebrow { margin: 0 0 12px; color: var(--brown); font-size: 13px; font-weight: 700; letter-spacing: .12em; }
+    h1 { margin: 0; max-width: 580px; font-size: clamp(30px, 7vw, 52px); line-height: 1.28; letter-spacing: -.035em; font-weight: 750; }
+    .intro-copy { max-width: 520px; margin: 18px 0 0; color: var(--muted); font-size: 16px; }
+    .quiet-note {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-top: 26px;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .quiet-note .dot { width: 9px; height: 9px; margin-top: 8px; border-radius: 50%; background: var(--apricot); box-shadow: 0 0 0 6px rgba(232,183,143,.13); flex: 0 0 auto; }
+    .workspace { min-width: 0; }
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 5px;
+      width: min(100%, 360px);
+      margin: 0 auto 18px;
+      padding: 5px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #eee3d5;
+    }
+    .tab {
+      min-width: 0;
+      min-height: 44px;
+      border: 0;
+      border-radius: 11px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 650;
+      transition: background-color .18s ease, color .18s ease, box-shadow .18s ease;
+    }
+    .tab[aria-selected="true"] { color: var(--ink); background: var(--paper); box-shadow: 0 3px 12px rgba(81,59,40,.07); }
+    .paper-stack { position: relative; min-width: 0; }
+    .paper-stack::before, .paper-stack::after {
+      content: "";
+      position: absolute;
+      inset: 10px 8px -7px;
+      z-index: 0;
+      border: 1px solid #e6d7c5;
+      border-radius: var(--radius);
+      background: #f2e7d9;
+      transform: rotate(.7deg);
+    }
+    .paper-stack::after { inset: 6px 12px -3px; background: #f8efe4; transform: rotate(-.45deg); }
+    .care-card {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+      overflow: hidden;
+      padding: 26px 22px 22px;
+      border: 1px solid #e5d6c4;
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .care-card::after {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      right: -38px;
+      top: -46px;
+      border-radius: 50%;
+      background: rgba(242, 201, 109, .16);
+      box-shadow: 0 0 45px rgba(242,201,109,.16);
+      pointer-events: none;
+      animation: lamp-breathe 5s ease-in-out infinite;
+    }
+    @keyframes lamp-breathe { 50% { opacity: .62; transform: scale(.94); } }
+    .card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 22px; }
+    .card-kicker { margin: 0 0 4px; color: var(--brown); font-size: 13px; font-weight: 700; }
+    .card-title { margin: 0; font-size: 25px; line-height: 1.35; letter-spacing: -.02em; }
+    .card-date { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+    .small-lamp { flex: 0 0 auto; width: 42px; height: 48px; }
+    .meal-list, .repeat-list { list-style: none; margin: 0; padding: 0; }
+    .meal-item { padding: 15px 0; border-top: 1px dashed var(--line); }
+    .meal-line { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; min-width: 0; }
+    .meal-name { min-width: 0; overflow-wrap: anywhere; font-weight: 650; }
+    .quantity { color: var(--muted); font-weight: 500; white-space: nowrap; }
+    .line-price { flex: 0 0 auto; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .item-meta { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+    .care-message {
+      position: relative;
+      margin: 20px 0;
+      padding: 17px 18px;
+      border-left: 3px solid var(--apricot);
+      border-radius: 4px 13px 13px 4px;
+      background: #f8ecde;
+      color: #604b3b;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .care-message p { margin: 0; }
+    .totals { padding-top: 4px; }
+    .total-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px 16px; }
+    .total-row + .total-row { margin-top: 8px; }
+    .total-label { color: var(--muted); font-size: 14px; }
+    .total-value { font-size: 30px; line-height: 1.3; font-weight: 750; font-variant-numeric: tabular-nums; }
+    .discount-row { color: var(--brown); font-size: 13px; }
+    .summary-controls { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px 14px; margin-bottom: 18px; }
+    .summary-controls label { color: var(--muted); font-size: 13px; }
+    .n-select {
+      min-height: 40px;
+      margin-left: 7px;
+      padding: 4px 28px 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--ink);
+      background: var(--paper);
+      cursor: pointer;
+    }
+    .scope-note { color: var(--brown); font-size: 12px; font-weight: 650; }
+    .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .stat { min-width: 0; padding: 15px; border: 1px solid var(--line); border-radius: 15px; background: #fbf3e9; }
+    .stat-label { color: var(--muted); font-size: 12px; }
+    .stat-value { display: block; margin-top: 3px; font-size: clamp(22px, 6vw, 29px); line-height: 1.4; font-weight: 750; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+    .stat-scope { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .section-block { margin-top: 22px; }
+    .section-title { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 5px 12px; margin: 0 0 9px; font-size: 15px; }
+    .section-title small { color: var(--muted); font-size: 11px; font-weight: 400; }
+    .repeat-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px dashed var(--line); }
+    .repeat-name { min-width: 0; overflow-wrap: anywhere; }
+    .repeat-count { flex: 0 0 auto; color: var(--brown); font-size: 13px; white-space: nowrap; }
+    .empty-copy { margin: 7px 0; color: var(--muted); font-size: 13px; }
+    .nutrition-list { border-top: 1px dashed var(--line); }
+    .nutrition-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 3px 14px; padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 13px; }
+    .nutrition-row span:last-child { color: var(--brown); text-align: right; font-variant-numeric: tabular-nums; }
+    .exclusion-note { margin: 18px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .actions { display: grid; gap: 9px; margin-top: 24px; }
+    .primary-button, .secondary-button {
+      min-height: 48px;
+      border-radius: 13px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform .16s ease, background-color .16s ease;
+    }
+    .primary-button { border: 1px solid var(--brown); background: var(--brown); color: #fffaf2; }
+    .primary-button:hover { background: #684b38; }
+    .secondary-button { border: 1px solid var(--line); background: transparent; color: var(--brown); }
+    .primary-button:active, .secondary-button:active { transform: translateY(1px); }
+    .button-icon { margin-right: 6px; }
+    .local-note { margin: 12px 0 0; text-align: center; color: var(--muted); font-size: 11px; }
+    .footer { padding: 12px 0 28px; color: var(--muted); text-align: center; font-size: 12px; }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: max(22px, env(safe-area-inset-bottom));
+      z-index: 10;
+      width: max-content;
+      max-width: calc(100% - 32px);
+      padding: 10px 16px;
+      border-radius: 12px;
+      color: var(--paper);
+      background: #59473a;
+      box-shadow: 0 8px 28px rgba(70,50,35,.2);
+      font-size: 13px;
+      text-align: center;
+      transform: translate(-50%, 12px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    @media (min-width: 600px) {
+      .shell { width: min(100% - 56px, 1120px); }
+      .care-card { padding: 30px; }
+      .actions { grid-template-columns: 1.25fr 1fr; }
+      .layout { padding-top: 34px; }
+    }
+    @media (min-width: 960px) {
+      .layout { grid-template-columns: minmax(0, .88fr) minmax(420px, 1.12fr); gap: 70px; padding: 56px 0 44px; }
+      .intro { padding-top: 48px; }
+      .care-card { padding: 32px; }
+      .topbar { min-height: 86px; }
+    }
+    @media (max-width: 370px) {
+      .shell { width: calc(100% - 24px); }
+      .care-card { padding: 22px 17px 18px; }
+      .card-title { font-size: 23px; }
+      .small-lamp { width: 34px; }
+      .stat { padding: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell topbar">
+    <div class="brand" aria-label="MCD w/Work 关怀小结">
+      <svg class="lamp-mark" viewBox="0 0 34 38" aria-hidden="true">
+        <path d="M8 16h18l-3-10H11L8 16Z" fill="#e8b78f" stroke="#795b46" stroke-width="1.4" stroke-linejoin="round"/>
+        <path d="M17 16v14m-7 3h14m-10-3h6" fill="none" stroke="#795b46" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M12 20h10" stroke="#f2c96d" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+      </svg>
+      <span class="brand-name">MCD w/Work｜关怀小结</span>
+    </div>
+    <div class="demo-badge" id="demo-badge">交互演示 · 示例数据非实时</div>
+  </header>
+
+  <main class="shell layout">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">A SMALL NOTE FOR YOU</p>
+      <h1 id="page-title">把一顿饭，<br>轻轻记下来。</h1>
+      <p class="intro-copy">不评判选择，也不给生活打分。只留下一顿饭的记录，和那些有依据的小小结。</p>
+      <div class="quiet-note"><span class="dot" aria-hidden="true"></span><span>不用做最完美的选择，选一顿让自己舒服的饭就好。</span></div>
+    </section>
+
+    <section class="workspace" aria-label="关怀小结演示">
+      <div class="tabs" role="tablist" aria-label="切换小结视图">
+        <button class="tab" id="tab-meal" role="tab" aria-selected="true" aria-controls="panel-meal" data-view="meal">这一餐</button>
+        <button class="tab" id="tab-recent" role="tab" aria-selected="false" aria-controls="panel-recent" tabindex="-1" data-view="recent">最近小结</button>
+      </div>
+
+      <div class="paper-stack">
+        <article class="care-card" id="care-card">
+          <section id="panel-meal" role="tabpanel" aria-labelledby="tab-meal"></section>
+          <section id="panel-recent" role="tabpanel" aria-labelledby="tab-recent" hidden></section>
+          <div class="actions">
+            <button class="primary-button" id="export-button" type="button"><span class="button-icon" aria-hidden="true">↓</span>保存关怀卡 PNG</button>
+            <button class="secondary-button" id="import-button" type="button">载入本地 JSON</button>
+            <input class="sr-only" id="json-input" type="file" accept="application/json,.json" aria-label="选择本地关怀小结 JSON 文件">
+          </div>
+          <p class="local-note" id="local-note">数据只在当前浏览器计算，不会上传 · 断网也能使用</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell footer">统计是看见记录，不是评价自己。</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script id="embedded-demo-data" type="application/json">{
+  "schemaVersion": 1,
+  "demo": true,
+  "label": "交互演示 · 示例数据非实时",
+  "currency": "CNY",
+  "orders": [
+    {
+      "id": "DEMO-001",
+      "createdAt": "2026-10-24T12:20:00+08:00",
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 3900,
+      "discountCents": 800,
+      "discountLabel": "示例套餐优惠",
+      "items": [
+        {
+          "name": "炙烤鸡肉堡",
+          "quantity": 1,
+          "unitPriceCents": 2200,
+          "nutrition": { "energyKcal": 428, "proteinG": 24, "fatG": 15, "carbsG": 48, "sodiumMg": 690, "calciumMg": 82 }
+        },
+        {
+          "name": "金黄小薯",
+          "quantity": 1,
+          "unitPriceCents": 1200,
+          "nutrition": { "energyKcal": 236, "proteinG": 3, "fatG": 11, "carbsG": 31, "sodiumMg": 180, "calciumMg": 12 }
+        },
+        {
+          "name": "热红茶",
+          "quantity": 1,
+          "unitPriceCents": 500,
+          "nutrition": { "energyKcal": 0, "proteinG": 0, "fatG": 0, "carbsG": 0, "sodiumMg": 0, "calciumMg": 4 }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-002",
+      "createdAt": "2026-10-22T12:35:00+08:00",
+      "status": "completed",
+      "fulfillment": "delivery",
+      "totalPaidCents": 3200,
+      "discountCents": 500,
+      "discountLabel": "示例满减",
+      "items": [
+        {
+          "name": "炙烤鸡肉堡",
+          "quantity": 1,
+          "unitPriceCents": 2200,
+          "nutrition": { "energyKcal": 428, "proteinG": 24, "fatG": 15, "carbsG": 48, "sodiumMg": 690, "calciumMg": 82 }
+        },
+        {
+          "name": "玉米粒杯",
+          "quantity": 1,
+          "unitPriceCents": 1000,
+          "nutrition": { "energyKcal": 96, "proteinG": 3, "fatG": 1, "carbsG": 20, "sodiumMg": 85, "calciumMg": 8 }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-003",
+      "createdAt": "2026-10-21T18:10:00+08:00",
+      "status": "cancelled",
+      "fulfillment": "pickup",
+      "totalPaidCents": 9900,
+      "items": [
+        { "name": "不应计入的餐品", "quantity": 3, "unitPriceCents": 3300 }
+      ]
+    },
+    {
+      "id": "DEMO-004",
+      "createdAt": "2026-10-20T12:15:00+08:00",
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 3000,
+      "items": [
+        {
+          "name": "蘑菇牛肉堡",
+          "quantity": 1,
+          "unitPriceCents": 2400,
+          "nutrition": { "energyKcal": 462, "proteinG": 25, "fatG": 19, "carbsG": 46, "sodiumMg": 720, "calciumMg": 110 }
+        },
+        {
+          "name": "热红茶",
+          "quantity": 1,
+          "unitPriceCents": 600,
+          "nutrition": { "energyKcal": 0, "proteinG": 0, "fatG": 0, "carbsG": 0, "sodiumMg": 0, "calciumMg": 4 }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-005",
+      "createdAt": "2026-10-19T12:05:00+08:00",
+      "status": "failed",
+      "fulfillment": "delivery",
+      "totalPaidCents": 8800,
+      "items": [
+        { "name": "失败订单餐品", "quantity": 2, "unitPriceCents": 4400 }
+      ]
+    },
+    {
+      "id": "DEMO-006",
+      "createdAt": "2026-10-18T12:40:00+08:00",
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 4100,
+      "discountCents": 300,
+      "discountLabel": "示例组合优惠",
+      "items": [
+        {
+          "name": "炙烤鸡肉堡",
+          "quantity": 1,
+          "unitPriceCents": 2200,
+          "nutrition": { "energyKcal": 428, "proteinG": 24, "fatG": 15, "carbsG": 48, "sodiumMg": 690, "calciumMg": 82 }
+        },
+        {
+          "name": "金黄小薯",
+          "quantity": 1,
+          "unitPriceCents": 1200,
+          "nutrition": { "energyKcal": 236, "proteinG": 3, "fatG": 11, "carbsG": 31, "sodiumMg": 180, "calciumMg": 12 }
+        },
+        {
+          "name": "冰柠檬茶",
+          "quantity": 1,
+          "unitPriceCents": 700,
+          "nutrition": null
+        }
+      ]
+    },
+    {
+      "id": "DEMO-007",
+      "createdAt": "2026-10-17T19:25:00+08:00",
+      "status": "refunded",
+      "fulfillment": "delivery",
+      "totalPaidCents": 7600,
+      "items": [
+        { "name": "退款订单餐品", "quantity": 2, "unitPriceCents": 3800 }
+      ]
+    },
+    {
+      "id": "DEMO-008",
+      "createdAt": "2026-10-16T12:30:00+08:00",
+      "status": "completed",
+      "fulfillment": "delivery",
+      "totalPaidCents": 2900,
+      "items": [
+        {
+          "name": "蘑菇牛肉堡",
+          "quantity": 1,
+          "unitPriceCents": 2400,
+          "nutrition": { "energyKcal": 462, "proteinG": 25, "fatG": 19, "carbsG": 46, "sodiumMg": 720, "calciumMg": 110 }
+        },
+        {
+          "name": "热红茶",
+          "quantity": 1,
+          "unitPriceCents": 500,
+          "nutrition": { "energyKcal": 0, "proteinG": 0, "fatG": 0, "carbsG": 0, "sodiumMg": 0, "calciumMg": 4 }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-009",
+      "createdAt": "2026-10-14T12:50:00+08:00",
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 3400,
+      "discountCents": 400,
+      "discountLabel": "示例套餐优惠",
+      "items": [
+        {
+          "name": "炙烤鸡肉堡",
+          "quantity": 1,
+          "unitPriceCents": 2200,
+          "nutrition": { "energyKcal": 428, "proteinG": 24, "fatG": 15, "carbsG": 48, "sodiumMg": 690, "calciumMg": 82 }
+        },
+        {
+          "name": "苹果片",
+          "quantity": 1,
+          "unitPriceCents": 800,
+          "nutrition": { "energyKcal": 42, "proteinG": 0, "fatG": 0, "carbsG": 11, "sodiumMg": 1, "calciumMg": 5 }
+        },
+        {
+          "name": "热红茶",
+          "quantity": 1,
+          "unitPriceCents": 400,
+          "nutrition": { "energyKcal": 0, "proteinG": 0, "fatG": 0, "carbsG": 0, "sodiumMg": 0, "calciumMg": 4 }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-010",
+      "createdAt": "2026-10-12T12:10:00+08:00",
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 2700,
+      "items": [
+        {
+          "name": "金黄小薯",
+          "quantity": 1,
+          "unitPriceCents": 1200,
+          "nutrition": { "energyKcal": 236, "proteinG": 3, "fatG": 11, "carbsG": 31, "sodiumMg": 180, "calciumMg": 12 }
+        },
+        {
+          "name": "冰柠檬茶",
+          "quantity": 1,
+          "unitPriceCents": 700,
+          "nutrition": { "energyKcal": 118, "proteinG": 0, "fatG": 0, "carbsG": 29, "sodiumMg": 12, "calciumMg": 6 }
+        },
+        {
+          "name": "苹果片",
+          "quantity": 1,
+          "unitPriceCents": 800,
+          "nutrition": { "energyKcal": 42, "proteinG": 0, "fatG": 0, "carbsG": 11, "sodiumMg": 1, "calciumMg": 5 }
+        }
+      ]
+    }
+  ]
+}</script>
+  <script>
+    (() => {
+      "use strict";
+
+      const NUTRIENTS = [
+        { key: "energyKcal", label: "能量", unit: "kcal" },
+        { key: "proteinG", label: "蛋白质", unit: "g" },
+        { key: "fatG", label: "脂肪", unit: "g" },
+        { key: "carbsG", label: "碳水化合物", unit: "g" },
+        { key: "sodiumMg", label: "钠", unit: "mg" },
+        { key: "calciumMg", label: "钙", unit: "mg" }
+      ];
+      const STATUS_LABELS = { completed: "已完成", cancelled: "已取消", failed: "失败", refunded: "已退款" };
+      const state = { data: null, view: "meal", n: 5, toastTimer: null };
+      const $ = (selector) => document.querySelector(selector);
+      const money = (cents) => `¥${(cents / 100).toFixed(2)}`;
+      const number = (value) => new Intl.NumberFormat("zh-CN", { maximumFractionDigits: 1 }).format(value);
+      const element = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined) node.textContent = text;
+        return node;
+      };
+      const isFiniteNumber = (value) => typeof value === "number" && Number.isFinite(value);
+      const itemQuantity = (item) => isFiniteNumber(item.quantity) && item.quantity > 0 ? item.quantity : 1;
+
+      function lampSvg() {
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("class", "small-lamp");
+        svg.setAttribute("viewBox", "0 0 44 50");
+        svg.setAttribute("aria-hidden", "true");
+        svg.innerHTML = '<path d="M9 21h26l-5-15H14L9 21Z" fill="#f5dfca" stroke="#795b46" stroke-width="1.4" stroke-linejoin="round"/><path d="M22 21v20m-10 4h20m-14-4h8" fill="none" stroke="#795b46" stroke-width="1.6" stroke-linecap="round"/><path d="M15 26h14" stroke="#f2c96d" stroke-width="4" stroke-linecap="round" opacity=".7"/>';
+        return svg;
+      }
+
+      function cardHeader(kicker, title, dateText) {
+        const head = element("div", "card-head");
+        const text = element("div");
+        text.append(element("p", "card-kicker", kicker), element("h2", "card-title", title));
+        if (dateText) text.append(element("p", "card-date", dateText));
+        head.append(text, lampSvg());
+        return head;
+      }
+
+      function readEmbeddedDemo() {
+        const node = $("#embedded-demo-data");
+        if (!node) throw new Error("页面缺少内嵌示例数据");
+        const raw = node.textContent.trim();
+        if (!raw) throw new Error("内嵌示例数据为空");
+        try {
+          return JSON.parse(raw);
+        } catch (error) {
+          throw new Error(`内嵌示例数据无法解析：${error.message}`);
+        }
+      }
+
+      function validateData(data) {
+        if (!data || !Array.isArray(data.orders) || data.orders.length === 0) throw new Error("JSON 中需要包含 orders 数组");
+        data.embeddedFallback = data.embeddedFallback === true;
+        data.source = data.source === "mcp" ? "mcp" : "demo";
+        if (data.source === "mcp" && typeof data.generatedAt !== "string") throw new Error("真实数据必须包含 generatedAt");
+        data.orders.forEach((order, index) => {
+          if (!order || typeof order.id !== "string" || typeof order.status !== "string") throw new Error(`第 ${index + 1} 笔订单缺少 id 或 status`);
+          if (!Array.isArray(order.items)) throw new Error(`订单 ${order.id} 缺少 items 数组`);
+          if (!isFiniteNumber(order.totalPaidCents) || order.totalPaidCents < 0) throw new Error(`订单 ${order.id} 的实付金额无效`);
+          order.items.forEach((item) => {
+            if (!item || typeof item.name !== "string" || !item.name.trim()) throw new Error(`订单 ${order.id} 存在无名称餐品`);
+            if (!isFiniteNumber(item.quantity) || !Number.isInteger(item.quantity) || item.quantity < 1) throw new Error(`订单 ${order.id} 的餐品数量无效`);
+          });
+        });
+        return data;
+      }
+
+      function validOrders() {
+        return state.data.orders
+          .filter((order) => order.status === "completed")
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      }
+
+      function dateLabel(iso) {
+        const date = new Date(iso);
+        if (Number.isNaN(date.getTime())) return "日期见示例记录";
+        return new Intl.DateTimeFormat("zh-CN", { timeZone: "Asia/Shanghai", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).format(date);
+      }
+
+      function calculateSummary() {
+        const orders = validOrders().slice(0, state.n);
+        const lines = orders.flatMap((order) => order.items);
+        const counts = new Map();
+        orders.forEach((order) => order.items.forEach((item) => {
+          const name = item.name.trim();
+          counts.set(name, (counts.get(name) || 0) + itemQuantity(item));
+        }));
+        const repeats = [...counts.entries()]
+          .map(([name, count]) => ({ name, count }))
+          .filter((item) => item.count > 1)
+          .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, "zh-CN"));
+        const nutrition = NUTRIENTS.map((nutrient) => {
+          let known = 0;
+          let total = 0;
+          lines.forEach((item) => {
+            const value = item.nutrition && item.nutrition[nutrient.key];
+            if (isFiniteNumber(value)) {
+              known += 1;
+              total += value * itemQuantity(item);
+            }
+          });
+          return { ...nutrient, known, totalItems: lines.length, total, complete: lines.length > 0 && known === lines.length };
+        }).filter((item) => item.known > 0);
+        return {
+          orders,
+          count: orders.length,
+          totalCents: orders.reduce((sum, order) => sum + order.totalPaidCents, 0),
+          discountCents: orders.reduce((sum, order) => sum + (isFiniteNumber(order.discountCents) ? order.discountCents : 0), 0),
+          repeats,
+          nutrition
+        };
+      }
+
+      function sourceMeta() {
+        return state.data.source === "mcp"
+          ? { kicker: "这一餐 · MCP 订单记录", recentKicker: "最近小结 · MCP 订单记录", badge: "真实订单数据 · 来自麦当劳 MCP", fake: false }
+          : { kicker: "这一餐 · 示例记录", recentKicker: "最近小结 · 示例记录", badge: "交互演示 · 示例数据非实时", fake: true };
+      }
+
+      function renderSourceBadge() {
+        const meta = sourceMeta();
+        const badge = $("#demo-badge");
+        badge.textContent = meta.badge;
+        badge.classList.toggle("is-live", !meta.fake);
+        $("#local-note").textContent = meta.fake
+          ? `未传入订单数据，当前显示页面内嵌的示例记录${state.data.embeddedFallback ? " · 载入真实数据失败后已回退" : ""} · 断网也能使用`
+          : `数据来自 MCP 查询结果${state.data.generatedAt ? ` · 生成于 ${String(state.data.generatedAt).replace("T", " ").slice(0, 16)}` : ""} · 统计在本地重算`;
+        document.title = meta.fake ? "MCD w/Work｜关怀小结" : "MCD w/Work｜关怀小结 · MCP 订单";
+      }
+
+      function renderMeal() {
+        const panel = $("#panel-meal");
+        panel.replaceChildren();
+        const meta = sourceMeta();
+        const order = validOrders()[0];
+        if (!order) {
+          panel.append(cardHeader(meta.kicker, "还没有有效订单"), element("p", "empty-copy", "完成一笔记录后，这里会轻轻接住它。"));
+          return;
+        }
+        panel.append(cardHeader(meta.kicker, "这一顿，已经替你记下", dateLabel(order.createdAt)));
+        const list = element("ul", "meal-list");
+        list.setAttribute("aria-label", "本餐餐品");
+        order.items.forEach((item) => {
+          const li = element("li", "meal-item");
+          const line = element("div", "meal-line");
+          const name = element("div", "meal-name");
+          name.append(document.createTextNode(item.name), " ", element("span", "quantity", `× ${itemQuantity(item)}`));
+          line.append(name);
+          if (isFiniteNumber(item.unitPriceCents)) line.append(element("span", "line-price", money(item.unitPriceCents * itemQuantity(item))));
+          li.append(line);
+          const energy = item.nutrition && item.nutrition.energyKcal;
+          if (isFiniteNumber(energy)) li.append(element("p", "item-meta", `示例营养字段 · 能量 ${number(energy * itemQuantity(item))} kcal`));
+          list.append(li);
+        });
+        panel.append(list);
+        const message = element("div", "care-message");
+        message.append(element("p", "", "今天这顿已经记下来了。不用做最完美的选择，选一顿让自己舒服的饭就好。"));
+        panel.append(message);
+        const totals = element("div", "totals");
+        const totalRow = element("div", "total-row");
+        totalRow.append(element("span", "total-label", "本单实付"), element("strong", "total-value", money(order.totalPaidCents)));
+        totals.append(totalRow);
+        if (isFiniteNumber(order.discountCents) || typeof order.discountLabel === "string") {
+          const discount = element("div", "total-row discount-row");
+          const label = typeof order.discountLabel === "string" ? order.discountLabel : "订单优惠";
+          const value = isFiniteNumber(order.discountCents) ? `已减 ${money(order.discountCents)}` : "详见示例记录";
+          discount.append(element("span", "", label), element("span", "", value));
+          totals.append(discount);
+        }
+        panel.append(totals);
+      }
+
+      function renderRecent() {
+        const panel = $("#panel-recent");
+        panel.replaceChildren();
+        const summary = calculateSummary();
+        panel.append(cardHeader(sourceMeta().recentKicker, `最近 ${summary.count} 笔有效订单`, "只陈述记录，不推测生活"));
+
+        const controls = element("div", "summary-controls");
+        const label = element("label", "", "查看最近");
+        const select = element("select", "n-select");
+        select.id = "n-select";
+        select.setAttribute("aria-label", "选择统计订单笔数");
+        const available = validOrders().length;
+        const options = [...new Set([3, 5, 7, available].filter((n) => n > 0 && n <= available))].sort((a, b) => a - b);
+        options.forEach((n) => {
+          const option = element("option", "", `${n} 笔`);
+          option.value = String(n);
+          option.selected = n === summary.count;
+          select.append(option);
+        });
+        select.addEventListener("change", () => { state.n = Number(select.value); renderRecent(); });
+        label.append(select);
+        controls.append(label, element("span", "scope-note", `统计口径：这 ${summary.count} 笔订单`));
+        panel.append(controls);
+
+        const stats = element("div", "stat-grid");
+        const countStat = element("div", "stat");
+        countStat.append(element("span", "stat-label", "有效订单"), element("strong", "stat-value", `${summary.count} 笔`), element("span", "stat-scope", `仅这 ${summary.count} 笔订单`));
+        const totalStat = element("div", "stat");
+        totalStat.append(element("span", "stat-label", "合计实付"), element("strong", "stat-value", money(summary.totalCents)), element("span", "stat-scope", `这 ${summary.count} 笔订单合计`));
+        stats.append(countStat, totalStat);
+        panel.append(stats);
+
+        const repeatSection = element("section", "section-block");
+        const repeatTitle = element("h3", "section-title", "重复出现的餐品");
+        repeatTitle.append(element("small", "", "按餐品数量计"));
+        repeatSection.append(repeatTitle);
+        if (summary.repeats.length) {
+          const list = element("ul", "repeat-list");
+          summary.repeats.forEach((item) => {
+            const li = element("li", "repeat-item");
+            li.append(element("span", "repeat-name", item.name), element("span", "repeat-count", `${item.count} 次`));
+            list.append(li);
+          });
+          repeatSection.append(list);
+        } else {
+          repeatSection.append(element("p", "empty-copy", `这 ${summary.count} 笔订单里没有重复餐品。`));
+        }
+        panel.append(repeatSection);
+
+        if (summary.nutrition.length) {
+          const nutritionSection = element("section", "section-block");
+          const nutritionTitle = element("h3", "section-title", "营养记录");
+          nutritionTitle.append(element("small", "", "仅计算已有字段，不构成评价"));
+          nutritionSection.append(nutritionTitle);
+          const list = element("div", "nutrition-list");
+          summary.nutrition.forEach((item) => {
+            const row = element("div", "nutrition-row");
+            const value = item.complete ? `${number(item.total)} ${item.unit} · 这 ${summary.count} 笔合计` : `已知 ${item.known}/${item.totalItems} 项`;
+            row.append(element("span", "", item.label), element("span", "", value));
+            list.append(row);
+          });
+          nutritionSection.append(list);
+          panel.append(nutritionSection);
+        }
+
+        const message = element("div", "care-message");
+        const care = summary.repeats.length
+          ? `记录里，“${summary.repeats[0].name}”在这 ${summary.count} 笔订单中出现了 ${summary.repeats[0].count} 次。喜欢熟悉的味道，也很好。`
+          : "这些只是记录，不需要拿来评价自己。";
+        message.append(element("p", "", care));
+        panel.append(message);
+        const excluded = state.data.orders.length - validOrders().length;
+        panel.append(element("p", "exclusion-note", `已排除 ${excluded} 笔非有效记录。取消、失败、退款订单均不计入；以上金额均为这 ${summary.count} 笔订单的合计，不代表月度或年度总额。`));
+      }
+
+      function setView(view, focusTab = false) {
+        state.view = view;
+        document.querySelectorAll("[data-view]").forEach((tab) => {
+          const active = tab.dataset.view === view;
+          tab.setAttribute("aria-selected", String(active));
+          tab.tabIndex = active ? 0 : -1;
+          if (active && focusTab) tab.focus();
+        });
+        $("#panel-meal").hidden = view !== "meal";
+        $("#panel-recent").hidden = view !== "recent";
+        if (view === "recent") renderRecent();
+      }
+
+      async function loadSourceFile() {
+        const source = new URLSearchParams(location.search).get("source");
+        if (!source || !source.trim()) return "none";
+        const panel = $("#panel-meal");
+        try {
+          if (!/\.json($|\?)/i.test(source)) throw new Error("source 参数必须指向 .json 文件");
+          const response = await fetch(source, { cache: "no-store" });
+          if (!response.ok) throw new Error(`读取失败（HTTP ${response.status}）`);
+          const payload = validateData(JSON.parse(await response.text()));
+          if (payload.source !== "mcp") throw new Error("传入数据未标记 source: \"mcp\"，不能作为真实订单展示");
+          if (payload.embeddedFallback) delete payload.embeddedFallback;
+          state.data = payload;
+          return "loaded";
+        } catch (error) {
+          const wrapped = element("div", "card-head");
+          const text = element("div");
+          text.append(element("p", "card-kicker", "数据载入失败"), element("h2", "card-title", "没有读到真实订单数据"));
+          wrapped.append(text, lampSvg());
+          const hint = location.protocol === "file:" ? "直接双击打开时浏览器会拦截读取本地文件。可点击下方“载入本地 JSON”选择文件，或在项目目录运行 python3 -m http.server 后访问带 source 参数的地址。" : "";
+          const fallback = element("button", "secondary-button", "改为查看内嵌示例记录");
+          fallback.type = "button";
+          fallback.id = "fallback-button";
+          fallback.addEventListener("click", () => useEmbeddedDemo(true));
+          const failure = element("p", "empty-copy", `${error.message}。为避免把演示记录误认为真实订单，页面暂不展示订单内容。${hint ? ` ${hint}` : ""}`);
+          panel.replaceChildren(wrapped, failure, fallback);
+          $("#panel-recent").hidden = true;
+          $("#panel-recent").replaceChildren();
+          document.querySelectorAll("[data-view]").forEach((tab) => { tab.disabled = true; });
+          $("#demo-badge").textContent = "未能载入真实订单数据";
+          $("#demo-badge").classList.remove("is-live");
+          $("#export-button").disabled = true;
+          return "failed";
+        }
+      }
+
+      function useEmbeddedDemo(afterFailure = false) {
+        const demo = readEmbeddedDemo();
+        demo.embeddedFallback = afterFailure;
+        state.data = validateData(demo);
+        document.querySelectorAll("[data-view]").forEach((tab) => { tab.disabled = false; });
+        $("#export-button").disabled = false;
+        renderAll();
+        if (afterFailure) toast("已改为显示页面内嵌的示例记录");
+      }
+
+      function renderAll() {
+        renderSourceBadge();
+        const available = validOrders().length;
+        if (!available) throw new Error("没有可展示的有效订单");
+        if (![3, 5, 7].includes(state.n) || state.n > available) state.n = Math.min(5, available);
+        renderMeal();
+        renderRecent();
+        setView(state.view);
+      }
+
+      function toast(message) {
+        const node = $("#toast");
+        clearTimeout(state.toastTimer);
+        node.textContent = message;
+        node.classList.add("show");
+        state.toastTimer = setTimeout(() => node.classList.remove("show"), 2800);
+      }
+
+      function roundedRect(ctx, x, y, width, height, radius) {
+        ctx.beginPath();
+        ctx.roundRect(x, y, width, height, radius);
+      }
+      function canvasText(ctx, text, x, y, maxWidth, lineHeight) {
+        const chars = [...String(text)];
+        let line = "";
+        let cursorY = y;
+        chars.forEach((char, index) => {
+          const test = line + char;
+          if (ctx.measureText(test).width > maxWidth && line) {
+            ctx.fillText(line, x, cursorY);
+            cursorY += lineHeight;
+            line = char;
+          } else line = test;
+          if (index === chars.length - 1 && line) {
+            ctx.fillText(line, x, cursorY);
+            cursorY += lineHeight;
+          }
+        });
+        return cursorY;
+      }
+      function canvasLine(ctx, y, width = 936) {
+        ctx.save();
+        ctx.strokeStyle = "#e7dac9";
+        ctx.setLineDash([5, 8]);
+        ctx.beginPath();
+        ctx.moveTo(72, y);
+        ctx.lineTo(72 + width, y);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      const SHARE_FONT = '"PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif';
+
+      function paintShareCanvas(canvas) {
+        const canvasHeight = canvas.height;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) throw new Error("当前浏览器不支持 Canvas");
+        const font = SHARE_FONT;
+        ctx.fillStyle = "#f6f0e6";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#e9dbc9";
+        roundedRect(ctx, 54, 62, 972, canvasHeight - 130, 32); ctx.fill();
+        ctx.fillStyle = "#fffaf2";
+        roundedRect(ctx, 42, 42, 972, canvasHeight - 130, 32); ctx.fill();
+        ctx.strokeStyle = "#e5d6c4"; ctx.lineWidth = 2; ctx.stroke();
+        ctx.fillStyle = "rgba(242,201,109,.18)";
+        ctx.beginPath(); ctx.arc(920, 130, 105, 0, Math.PI * 2); ctx.fill();
+
+        const badgeText = sourceMeta().fake ? "交互演示 · 示例数据非实时" : "真实订单数据 · 来自麦当劳 MCP";
+        ctx.fillStyle = "#795b46";
+        ctx.font = `700 30px ${font}`;
+        ctx.fillText("MCD w/Work｜关怀小结", 92, 112);
+        ctx.font = `600 25px ${font}`;
+        ctx.fillText(badgeText, 92, 158);
+        ctx.fillStyle = "#493b32";
+        ctx.font = `750 58px ${font}`;
+        const title = state.view === "meal" ? "这一顿，已经替你记下" : `最近 ${calculateSummary().count} 笔有效订单`;
+        ctx.fillText(title, 92, 254);
+        ctx.fillStyle = "#806f61";
+        ctx.font = `30px ${font}`;
+        ctx.fillText("只保留记录，不评价选择。", 92, 304);
+
+        let y = 374;
+        if (state.view === "meal") {
+          const order = validOrders()[0];
+          ctx.fillStyle = "#795b46"; ctx.font = `600 28px ${font}`;
+          ctx.fillText(dateLabel(order.createdAt), 92, y); y += 42;
+          order.items.forEach((item) => {
+            canvasLine(ctx, y); y += 50;
+            ctx.fillStyle = "#493b32"; ctx.font = `650 36px ${font}`;
+            y = canvasText(ctx, `${item.name} × ${itemQuantity(item)}`, 92, y, 650, 48);
+            if (isFiniteNumber(item.unitPriceCents)) {
+              ctx.fillStyle = "#795b46"; ctx.font = `34px ${font}`;
+              ctx.fillText(money(item.unitPriceCents * itemQuantity(item)), 820, y - 48);
+            }
+            const energy = item.nutrition && item.nutrition.energyKcal;
+            if (isFiniteNumber(energy)) {
+              ctx.fillStyle = "#806f61"; ctx.font = `27px ${font}`;
+              ctx.fillText(`示例营养字段 · 能量 ${number(energy * itemQuantity(item))} kcal`, 92, y + 4);
+              y += 42;
+            }
+            y += 24;
+          });
+          y += 12;
+          ctx.fillStyle = "#f8ecde";
+          roundedRect(ctx, 76, y, 904, 190, 18); ctx.fill();
+          ctx.fillStyle = "#e8b78f"; ctx.fillRect(76, y, 6, 190);
+          ctx.fillStyle = "#604b3b"; ctx.font = `32px ${font}`;
+          canvasText(ctx, "今天这顿已经记下来了。不用做最完美的选择，选一顿让自己舒服的饭就好。", 108, y + 58, 824, 50);
+          y += 240;
+          ctx.fillStyle = "#806f61"; ctx.font = `30px ${font}`;
+          ctx.fillText("本单实付", 92, y);
+          ctx.fillStyle = "#493b32"; ctx.font = `750 58px ${font}`;
+          ctx.fillText(money(order.totalPaidCents), 760, y + 4);
+          y += 60;
+          if (isFiniteNumber(order.discountCents) || typeof order.discountLabel === "string") {
+            ctx.fillStyle = "#795b46"; ctx.font = `28px ${font}`;
+            const label = typeof order.discountLabel === "string" ? order.discountLabel : "订单优惠";
+            const value = isFiniteNumber(order.discountCents) ? `已减 ${money(order.discountCents)}` : "详见示例记录";
+            ctx.fillText(`${label} · ${value}`, 92, y);
+          }
+        } else {
+          const summary = calculateSummary();
+          ctx.fillStyle = "#795b46"; ctx.font = `600 28px ${font}`;
+          ctx.font = `600 28px ${font}`;
+          ctx.fillText(`${sourceMeta().recentKicker} · 统计口径：这 ${summary.count} 笔订单`, 92, y); y += 44;
+          ctx.fillStyle = "#fbf3e9";
+          roundedRect(ctx, 76, y, 440, 174, 20); ctx.fill();
+          roundedRect(ctx, 540, y, 440, 174, 20); ctx.fill();
+          ctx.fillStyle = "#806f61"; ctx.font = `27px ${font}`;
+          ctx.fillText("有效订单", 104, y + 50); ctx.fillText("合计实付", 568, y + 50);
+          ctx.fillStyle = "#493b32"; ctx.font = `750 48px ${font}`;
+          ctx.fillText(`${summary.count} 笔`, 104, y + 112); ctx.fillText(money(summary.totalCents), 568, y + 112);
+          ctx.fillStyle = "#806f61"; ctx.font = `23px ${font}`;
+          ctx.fillText(`仅这 ${summary.count} 笔订单`, 104, y + 151); ctx.fillText(`这 ${summary.count} 笔订单合计`, 568, y + 151);
+          y += 226;
+          ctx.fillStyle = "#493b32"; ctx.font = `700 34px ${font}`;
+          ctx.fillText("重复出现的餐品", 92, y); y += 34;
+          const repeats = summary.repeats.slice(0, 4);
+          if (repeats.length) repeats.forEach((item) => {
+            canvasLine(ctx, y); y += 48;
+            ctx.fillStyle = "#493b32"; ctx.font = `32px ${font}`;
+            ctx.fillText(item.name, 92, y);
+            ctx.fillStyle = "#795b46"; ctx.fillText(`${item.count} 次`, 858, y);
+            y += 28;
+          });
+          else {
+            ctx.fillStyle = "#806f61"; ctx.font = `29px ${font}`;
+            ctx.fillText(`这 ${summary.count} 笔订单里没有重复餐品。`, 92, y + 36); y += 72;
+          }
+          if (summary.repeats.length > repeats.length) {
+            ctx.fillStyle = "#806f61"; ctx.font = `26px ${font}`;
+            ctx.fillText(`另有 ${summary.repeats.length - repeats.length} 种重复餐品未展开`, 92, y + 8); y += 40;
+          }
+          y += 30;
+          if (summary.nutrition.length) {
+            ctx.fillStyle = "#493b32"; ctx.font = `700 34px ${font}`;
+            ctx.fillText("营养记录 · 仅计算已有字段", 92, y); y += 38;
+            summary.nutrition.slice(0, 4).forEach((item) => {
+              canvasLine(ctx, y); y += 48;
+              ctx.fillStyle = "#806f61"; ctx.font = `28px ${font}`;
+              ctx.fillText(item.label, 92, y);
+              ctx.fillStyle = "#795b46";
+              const value = item.complete ? `${number(item.total)} ${item.unit} · 这 ${summary.count} 笔合计` : `已知 ${item.known}/${item.totalItems} 项`;
+              ctx.fillText(value, 390, y);
+              y += 26;
+            });
+            y += 22;
+          }
+          const care = summary.repeats.length
+            ? `记录里，“${summary.repeats[0].name}”出现了 ${summary.repeats[0].count} 次。喜欢熟悉的味道，也很好。`
+            : "这些只是记录，不需要拿来评价自己。";
+          const careHeight = 170;
+          ctx.fillStyle = "#f8ecde"; roundedRect(ctx, 76, y, 904, careHeight, 18); ctx.fill();
+          ctx.fillStyle = "#e8b78f"; ctx.fillRect(76, y, 6, careHeight);
+          ctx.fillStyle = "#604b3b"; ctx.font = `31px ${font}`;
+          canvasText(ctx, care, 108, y + 54, 824, 48);
+          y += careHeight + 34;
+          ctx.fillStyle = "#806f61"; ctx.font = `25px ${font}`;
+          y = canvasText(ctx, `取消、失败、退款订单未计入。金额为这 ${summary.count} 笔订单合计，不代表月度或年度总额。`, 92, y, 860, 40);
+        }
+        const contentEnd = y;
+        ctx.fillStyle = "#806f61"; ctx.font = `26px ${font}`;
+        ctx.fillText("统计是看见记录，不是评价自己。", 92, canvasHeight - 110);
+        return contentEnd;
+      }
+
+      function buildShareCanvas() {
+        const canvas = document.createElement("canvas");
+        canvas.width = 1080;
+        canvas.height = state.view === "recent" ? 2080 : 1720;
+        const contentEnd = paintShareCanvas(canvas);
+        const height = Math.min(2600, Math.max(state.view === "recent" ? 1480 : 1240, Math.ceil(contentEnd + 150)));
+        if (height !== canvas.height) {
+          canvas.height = height;
+          paintShareCanvas(canvas);
+        }
+        return canvas;
+      }
+
+      async function exportPng() {
+        const button = $("#export-button");
+        button.disabled = true;
+        try {
+          const canvas = buildShareCanvas();
+          const blob = await new Promise((resolve, reject) => canvas.toBlob((result) => result ? resolve(result) : reject(new Error("PNG 生成失败")), "image/png"));
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = `MCD-w-Work-关怀小结-${state.view === "meal" ? "这一餐" : `最近${calculateSummary().count}笔`}.png`;
+          document.body.append(link);
+          link.click();
+          link.remove();
+          setTimeout(() => URL.revokeObjectURL(url), 1500);
+          toast("关怀卡已生成，留意浏览器下载");
+        } catch (error) {
+          console.error(error);
+          toast(error.message || "导出失败，请稍后重试");
+        } finally {
+          button.disabled = false;
+        }
+      }
+
+      async function importJson(file) {
+        try {
+          const parsed = validateData(JSON.parse(await file.text()));
+          state.data = parsed;
+          renderAll();
+          toast(parsed.source === "mcp" ? "已载入 MCP 订单数据并在本地重算" : "已从本地 JSON 重新计算");
+        } catch (error) {
+          toast(`无法载入：${error.message}`);
+        } finally {
+          $("#json-input").value = "";
+        }
+      }
+
+      document.querySelectorAll("[data-view]").forEach((tab) => {
+        tab.addEventListener("click", () => setView(tab.dataset.view));
+        tab.addEventListener("keydown", (event) => {
+          if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+          event.preventDefault();
+          const next = event.key === "Home" ? "meal" : event.key === "End" ? "recent" : state.view === "meal" ? "recent" : "meal";
+          setView(next, true);
+        });
+      });
+      $("#export-button").addEventListener("click", exportPng);
+      window.careSummaryDemo = { buildShareCanvas, calculateSummary, getData: () => state.data };
+      $("#import-button").addEventListener("click", () => $("#json-input").click());
+      $("#json-input").addEventListener("change", (event) => { if (event.target.files[0]) importJson(event.target.files[0]); });
+
+      (async () => {
+        try {
+          const sourceResult = await loadSourceFile();
+          if (sourceResult === "loaded") renderAll();
+          else if (sourceResult === "none") useEmbeddedDemo(false);
+        } catch (error) {
+          console.error(error);
+          $("#panel-meal").replaceChildren(element("p", "empty-copy", `页面数据载入失败：${error.message}`));
+          $("#export-button").disabled = true;
+        }
+      })();
+    })();
+  </script>
+</body>
+</html>
