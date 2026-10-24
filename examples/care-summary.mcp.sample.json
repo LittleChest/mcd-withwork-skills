@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "source": "mcp",
+  "label": "真实订单数据 · 来自麦当劳 MCP",
+  "generatedAt": "2026-10-24T22:55:00+08:00",
+  "currency": "CNY",
+  "fieldNotes": {
+    "purpose": "演示页面如何承接 MCP 查询结果；本文件仅保留脱敏示例值，不含真实订单号、门店、地址或会员信息。",
+    "nutrition": "query-order 通常不返回逐项营养值。此处标注为 null，页面应显示“已知 X/Y 项”或隐藏营养统计，不得编造。",
+    "unavailableFields": "status、items、totalPaidCents 之外的优惠、营养等字段在真实接口缺失时必须省略，不得用示例值补齐。"
+  },
+  "orders": [
+    {
+      "id": "EXAMPLE-ORDER-0001",
+      "createdAt": "2026-10-24T12:32:00+08:00",
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 4150,
+      "items": [
+        { "name": "示例餐品 A", "quantity": 1, "unitPriceCents": 2450, "nutrition": null },
+        { "name": "示例餐品 B", "quantity": 1, "unitPriceCents": 1200, "nutrition": null },
+        { "name": "示例饮品 C", "quantity": 1, "unitPriceCents": 500, "nutrition": null }
+      ]
+    },
+    {
+      "id": "EXAMPLE-ORDER-0002",
+      "createdAt": "2026-10-23T12:46:00+08:00",
+      "status": "completed",
+      "fulfillment": "delivery",
+      "totalPaidCents": 3600,
+      "items": [
+        { "name": "示例餐品 A", "quantity": 1, "unitPriceCents": 2450, "nutrition": null },
+        { "name": "示例小食 D", "quantity": 1, "unitPriceCents": 1150, "nutrition": null }
+      ]
+    },
+    {
+      "id": "EXAMPLE-ORDER-0003",
+      "createdAt": "2026-10-22T18:20:00+08:00",
+      "status": "cancelled",
+      "fulfillment": "pickup",
+      "totalPaidCents": 5400,
+      "items": [
+        { "name": "示例取消订单餐品", "quantity": 2, "unitPriceCents": 2700, "nutrition": null }
+      ]
+    },
+    {
+      "id": "EXAMPLE-ORDER-0004",
+      "createdAt": "2026-10-21T12:18:00+08:00",
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 3300,
+      "items": [
+        { "name": "示例餐品 E", "quantity": 1, "unitPriceCents": 2700, "nutrition": null },
+        { "name": "示例饮品 C", "quantity": 1, "unitPriceCents": 600, "nutrition": null }
+      ]
+    },
+    {
+      "id": "EXAMPLE-ORDER-0005",
+      "createdAt": "2026-10-20T12:25:00+08:00",
+      "status": "completed",
+      "fulfillment": "delivery",
+      "totalPaidCents": 4200,
+      "items": [
+        { "name": "示例餐品 A", "quantity": 1, "unitPriceCents": 2450, "nutrition": null },
+        { "name": "示例小食 D", "quantity": 1, "unitPriceCents": 1150, "nutrition": null },
+        { "name": "示例饮品 C", "quantity": 1, "unitPriceCents": 600, "nutrition": null }
+      ]
+    }
+  ]
+}

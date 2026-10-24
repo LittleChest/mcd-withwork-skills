@@ -173,6 +173,10 @@
       line-height: 1.8;
     }
     .care-message p { margin: 0; }
+    .meal-period-label { display: flex; align-items: center; gap: 7px; margin-bottom: 7px !important; color: var(--brown); font-size: 12px; font-weight: 700; letter-spacing: .04em; }
+    .period-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 4px rgba(242,201,109,.16); flex: 0 0 auto; }
+    .care-main { font-size: 16px; line-height: 1.75; font-weight: 650; overflow-wrap: anywhere; }
+    .care-support { margin-top: 5px !important; color: #776353; font-size: 13px; line-height: 1.75; overflow-wrap: anywhere; }
     .totals { padding-top: 4px; }
     .total-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px 16px; }
     .total-row + .total-row { margin-top: 8px; }
@@ -207,6 +211,38 @@
     .nutrition-list { border-top: 1px dashed var(--line); }
     .nutrition-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 3px 14px; padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 13px; }
     .nutrition-row span:last-child { color: var(--brown); text-align: right; font-variant-numeric: tabular-nums; }
+    .time-section { padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: #fdf7ee; }
+    .time-title { display: block; margin-bottom: 2px; font-size: 16px; letter-spacing: -.01em; }
+    .time-lead { margin: 0 0 13px; color: var(--muted); font-size: 12px; }
+    .period-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .period-card {
+      --period-fill: #e8b78f;
+      --period-track: #fbf1e7;
+      min-width: 0;
+      padding: 11px 10px 10px;
+      border: 1px solid rgba(121,91,70,.12);
+      border-top: 3px solid var(--period-fill);
+      border-radius: 12px;
+      background: var(--period-track);
+      color: var(--ink);
+    }
+    .period-card[data-period="breakfast"] { --period-fill: #f3d28d; --period-track: #fbf4e2; }
+    .period-card[data-period="lunch"] { --period-fill: #e8b78f; --period-track: #faece0; }
+    .period-card[data-period="dinner"] { --period-fill: #c49b7d; --period-track: #f6e9df; }
+    .period-card[data-period="night"] { --period-fill: #9d8a7b; --period-track: #f0e9e2; }
+    .period-card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 5px; min-width: 0; }
+    .period-short { color: var(--brown); font-size: 12px; font-weight: 750; }
+    .period-label { color: var(--muted); font-size: 10px; }
+    .period-figure { display: flex; align-items: baseline; gap: 3px; margin-top: 3px; }
+    .period-figure strong { font-size: 25px; line-height: 1.25; font-variant-numeric: tabular-nums; }
+    .period-unit { color: var(--muted); font-size: 11px; }
+    .period-share { display: block; color: var(--brown); font-size: 11px; font-weight: 650; font-variant-numeric: tabular-nums; }
+    .period-range { display: block; margin-top: 2px; color: var(--muted); font-size: 9px; font-variant-numeric: tabular-nums; }
+    .period-empty { display: block; margin-top: 4px; color: #7d6c5e; font-size: 10px; line-height: 1.5; }
+    .period-result { margin-top: 13px; padding: 12px 13px; border-radius: 11px; background: rgba(255,250,242,.78); }
+    .period-result-label { display: block; color: var(--muted); font-size: 10px; letter-spacing: .04em; }
+    .period-result p { margin: 3px 0 0; font-size: 14px; font-weight: 650; line-height: 1.7; overflow-wrap: anywhere; }
+    .period-note { margin: 9px 0 0; color: var(--muted); font-size: 10px; line-height: 1.7; }
     .exclusion-note { margin: 18px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
     .actions { display: grid; gap: 9px; margin-top: 24px; }
     .primary-button, .secondary-button {
@@ -249,6 +285,11 @@
       .care-card { padding: 30px; }
       .actions { grid-template-columns: 1.25fr 1fr; }
       .layout { padding-top: 34px; }
+    }
+    @media (min-width: 520px) {
+      .period-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .period-card { padding-inline: 8px; }
+      .period-empty { font-size: 9px; }
     }
     @media (min-width: 960px) {
       .layout { grid-template-columns: minmax(0, .88fr) minmax(420px, 1.12fr); gap: 70px; padding: 56px 0 44px; }
@@ -321,7 +362,8 @@
   "orders": [
     {
       "id": "DEMO-001",
-      "createdAt": "2026-10-24T12:20:00+08:00",
+      "createdAt": "2026-10-24T08:12:00+08:00",
+      "completedAt": "2026-10-24T08:34:00+08:00",
       "status": "completed",
       "fulfillment": "pickup",
       "totalPaidCents": 3900,
@@ -351,6 +393,7 @@
     {
       "id": "DEMO-002",
       "createdAt": "2026-10-22T12:35:00+08:00",
+      "completedAt": "2026-10-22T13:02:00+08:00",
       "status": "completed",
       "fulfillment": "delivery",
       "totalPaidCents": 3200,
@@ -383,7 +426,8 @@
     },
     {
       "id": "DEMO-004",
-      "createdAt": "2026-10-20T12:15:00+08:00",
+      "createdAt": "2026-10-20T18:20:00+08:00",
+      "completedAt": "2026-10-20T18:48:00+08:00",
       "status": "completed",
       "fulfillment": "pickup",
       "totalPaidCents": 3000,
@@ -414,7 +458,8 @@
     },
     {
       "id": "DEMO-006",
-      "createdAt": "2026-10-18T12:40:00+08:00",
+      "createdAt": "2026-10-18T22:47:00+08:00",
+      "completedAt": "2026-10-18T23:05:00+08:00",
       "status": "completed",
       "fulfillment": "pickup",
       "totalPaidCents": 4100,
@@ -453,7 +498,8 @@
     },
     {
       "id": "DEMO-008",
-      "createdAt": "2026-10-16T12:30:00+08:00",
+      "createdAt": "2026-10-16T07:55:00+08:00",
+      "completedAt": "2026-10-16T08:22:00+08:00",
       "status": "completed",
       "fulfillment": "delivery",
       "totalPaidCents": 2900,
@@ -474,7 +520,8 @@
     },
     {
       "id": "DEMO-009",
-      "createdAt": "2026-10-14T12:50:00+08:00",
+      "createdAt": "2026-10-14T16:40:00+08:00",
+      "completedAt": "2026-10-14T17:02:00+08:00",
       "status": "completed",
       "fulfillment": "pickup",
       "totalPaidCents": 3400,
@@ -503,7 +550,8 @@
     },
     {
       "id": "DEMO-010",
-      "createdAt": "2026-10-12T12:10:00+08:00",
+      "createdAt": "2026-10-12T06:30:00+08:00",
+      "completedAt": "2026-10-12T06:55:00+08:00",
       "status": "completed",
       "fulfillment": "pickup",
       "totalPaidCents": 2700,
@@ -527,6 +575,22 @@
           "nutrition": { "energyKcal": 42, "proteinG": 0, "fatG": 0, "carbsG": 11, "sodiumMg": 1, "calciumMg": 5 }
         }
       ]
+    },
+    {
+      "id": "DEMO-011",
+      "createdAt": null,
+      "completedAt": null,
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 1500,
+      "items": [
+        {
+          "name": "苹果片",
+          "quantity": 1,
+          "unitPriceCents": 1500,
+          "nutrition": null
+        }
+      ]
     }
   ]
 }</script>
@@ -543,10 +607,50 @@
         { key: "calciumMg", label: "钙", unit: "mg" }
       ];
       const STATUS_LABELS = { completed: "已完成", cancelled: "已取消", failed: "失败", refunded: "已退款" };
+      const ORDER_TIME_ZONE = "Asia/Shanghai";
+      // 四个时段覆盖完整 24 小时；endSeconds 为不含上界，边界值不会重叠。
+      const MEAL_PERIODS = [
+        {
+          id: "breakfast", label: "早餐", short: "晨光", range: "05:00–10:29",
+          startSeconds: 5 * 3600, endSeconds: 10 * 3600 + 30 * 60,
+          main: "先把自己照顾好，再开始今天。",
+          support: "这一顿热乎的，是一天里第一件对自己好的小事。"
+        },
+        {
+          id: "lunch", label: "午餐", short: "正午", range: "10:30–15:59",
+          startSeconds: 10 * 3600 + 30 * 60, endSeconds: 16 * 3600,
+          main: "忙到中午了，先把饭吃好。",
+          support: "下午的事，等吃完再说。"
+        },
+        {
+          id: "dinner", label: "晚餐", short: "傍晚", range: "16:00–20:59",
+          startSeconds: 16 * 3600, endSeconds: 21 * 3600,
+          main: "一天慢慢收尾，晚饭也别交给待办清单。",
+          support: "先把这一顿吃好，剩下的事情可以晚一点。"
+        },
+        {
+          id: "night", label: "深夜", short: "夜深", range: "21:00–04:59",
+          startSeconds: 21 * 3600, endSeconds: 29 * 3600,
+          main: "夜里也值得吃一口热的。",
+          support: "不管今天过得怎样，吃完就早点休息吧。小灯不评价你几点吃饭。"
+        }
+      ];
+      const PERIOD_COLORS = {
+        breakfast: { fill: "#f3d28d", track: "#fbf4e2", ink: "#5c4833" },
+        lunch: { fill: "#e8b78f", track: "#faece0", ink: "#5c4434" },
+        dinner: { fill: "#c49b7d", track: "#f6e9df", ink: "#574237" },
+        night: { fill: "#9d8a7b", track: "#f0e9e2", ink: "#50443c" }
+      };
+      const BEIJING_PARTS_FORMATTER = new Intl.DateTimeFormat("zh-CN", {
+        timeZone: ORDER_TIME_ZONE, year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23"
+      });
+      const BEIJING_WEEKDAY_FORMATTER = new Intl.DateTimeFormat("zh-CN", { timeZone: ORDER_TIME_ZONE, weekday: "short" });
       const state = { data: null, view: "meal", n: 5, toastTimer: null };
       const $ = (selector) => document.querySelector(selector);
       const money = (cents) => `¥${(cents / 100).toFixed(2)}`;
       const number = (value) => new Intl.NumberFormat("zh-CN", { maximumFractionDigits: 1 }).format(value);
+      const percentLabel = (share) => `${Number((share * 100).toFixed(1))}%`;
       const element = (tag, className, text) => {
         const node = document.createElement(tag);
         if (className) node.className = className;
@@ -603,16 +707,85 @@
         return data;
       }
 
+      // 支持数字、数字字符串、ISO 8601（含/不含时区）与 Unix 秒/毫秒。
+      // 无时区的 ISO 按北京时间解释；只有日期、没有具体时刻时视为时间未知。
+      function parseOrderTimestamp(value) {
+        if (isFiniteNumber(value)) {
+          const milliseconds = Math.abs(value) >= 1e12 ? value : Math.abs(value) >= 1e9 ? value * 1000 : null;
+          return isFiniteNumber(milliseconds) && !Number.isNaN(new Date(milliseconds).getTime()) ? milliseconds : null;
+        }
+        if (typeof value !== "string" || !value.trim()) return null;
+        let text = value.trim();
+        if (/^\d+$/.test(text)) {
+          const numeric = Number(text);
+          if (!Number.isSafeInteger(numeric)) return null;
+          return parseOrderTimestamp(numeric);
+        }
+        if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return null;
+        text = text.replace(/^(\d{4}-\d{2}-\d{2})\s+/, "$1T");
+        if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,3})?)?(?:Z|[+-]\d{2}:?\d{2})?$/.test(text)) return null;
+        if (!/(?:Z|[+-]\d{2}:?\d{2})$/.test(text)) text += "+08:00";
+        const milliseconds = Date.parse(text);
+        return Number.isNaN(milliseconds) ? null : milliseconds;
+      }
+
+      function beijingParts(milliseconds) {
+        if (!isFiniteNumber(milliseconds)) return null;
+        const parts = BEIJING_PARTS_FORMATTER.formatToParts(new Date(milliseconds));
+        const read = (type) => Number(parts.find((part) => part.type === type)?.value);
+        return { year: read("year"), month: read("month"), day: read("day"), hour: read("hour"), minute: read("minute"), second: read("second") };
+      }
+
+      function periodForTimestamp(milliseconds) {
+        const parts = beijingParts(milliseconds);
+        if (!parts) return null;
+        const seconds = parts.hour * 3600 + parts.minute * 60 + parts.second;
+        const direct = MEAL_PERIODS.find((period) => period.id !== "night" && seconds >= period.startSeconds && seconds < period.endSeconds);
+        if (direct) return direct;
+        return seconds >= 21 * 3600 || seconds < 5 * 3600 ? MEAL_PERIODS.find((period) => period.id === "night") : null;
+      }
+
+      function periodForOrderCreated(order) {
+        return periodForTimestamp(parseOrderTimestamp(order.createdAt));
+      }
+
+      // 时段统计优先使用完成时间；为兼容只有点餐时间的订单，才回退到 createdAt。
+      function statsTimeForOrder(order) {
+        const completed = parseOrderTimestamp(order.completedAt);
+        if (completed !== null) return { milliseconds: completed, source: "completedAt" };
+        const created = parseOrderTimestamp(order.createdAt);
+        if (created !== null) return { milliseconds: created, source: "createdAt" };
+        return { milliseconds: null, source: null };
+      }
+
+      function formatBeijingDate(milliseconds) {
+        const parts = beijingParts(milliseconds);
+        if (!parts) return "日期未记录";
+        const weekday = BEIJING_WEEKDAY_FORMATTER.format(new Date(milliseconds));
+        return `${parts.year}年${parts.month}月${parts.day}日 ${weekday}`;
+      }
+
+      function formatBeijingTime(milliseconds) {
+        const parts = beijingParts(milliseconds);
+        return parts ? `${String(parts.hour).padStart(2, "0")}:${String(parts.minute).padStart(2, "0")}` : "时间未记录";
+      }
+
+      function mealMomentLabel(order) {
+        const created = parseOrderTimestamp(order.createdAt);
+        if (created === null) return "点餐时间未记录 · 北京时间";
+        const completed = parseOrderTimestamp(order.completedAt);
+        return `${formatBeijingDate(created)} · ${formatBeijingTime(created)} 点餐${completed !== null ? ` · ${formatBeijingTime(completed)} 完成` : ""}（北京时间）`;
+      }
+
+      function joinChinese(labels) {
+        if (labels.length <= 1) return labels[0] || "";
+        return `${labels.slice(0, -1).join("、")}和${labels.at(-1)}`;
+      }
+
       function validOrders() {
         return state.data.orders
           .filter((order) => order.status === "completed")
-          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      }
-
-      function dateLabel(iso) {
-        const date = new Date(iso);
-        if (Number.isNaN(date.getTime())) return "日期见示例记录";
-        return new Intl.DateTimeFormat("zh-CN", { timeZone: "Asia/Shanghai", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).format(date);
+          .sort((a, b) => (statsTimeForOrder(b).milliseconds || 0) - (statsTimeForOrder(a).milliseconds || 0));
       }
 
       function calculateSummary() {
@@ -639,13 +812,47 @@
           });
           return { ...nutrient, known, totalItems: lines.length, total, complete: lines.length > 0 && known === lines.length };
         }).filter((item) => item.known > 0);
+
+        const timedOrders = orders.map((order) => ({ order, time: statsTimeForOrder(order) }));
+        const identifiable = timedOrders.filter((entry) => entry.time.milliseconds !== null);
+        const countsByPeriod = new Map(MEAL_PERIODS.map((period) => [period.id, 0]));
+        identifiable.forEach((entry) => {
+          const period = periodForTimestamp(entry.time.milliseconds);
+          if (period) countsByPeriod.set(period.id, countsByPeriod.get(period.id) + 1);
+        });
+        const periodStats = MEAL_PERIODS.map((period) => {
+          const count = countsByPeriod.get(period.id);
+          return { ...period, count, share: identifiable.length ? count / identifiable.length : 0 };
+        });
+        const highest = periodStats.reduce((max, period) => Math.max(max, period.count), 0);
+        const topPeriods = periodStats.filter((period) => period.count === highest && highest > 0);
+        let timeSummary = "";
+        let hasEnoughTimeData = false;
+        if (identifiable.length === 0) {
+          timeSummary = "再多几顿饭，小灯才会慢慢记得。";
+        } else if (topPeriods.length > 1) {
+          hasEnoughTimeData = true;
+          timeSummary = `这些记录里，${joinChinese(topPeriods.map((period) => period.label))}一样多，都是你会好好照顾自己的时刻。`;
+        } else if (highest >= 2) {
+          hasEnoughTimeData = true;
+          timeSummary = `这些记录里，${topPeriods[0].label}是你更常照顾自己的时刻。`;
+        } else {
+          timeSummary = "再多几顿饭，小灯才会慢慢记得。";
+        }
+
         return {
           orders,
           count: orders.length,
           totalCents: orders.reduce((sum, order) => sum + order.totalPaidCents, 0),
           discountCents: orders.reduce((sum, order) => sum + (isFiniteNumber(order.discountCents) ? order.discountCents : 0), 0),
           repeats,
-          nutrition
+          nutrition,
+          identifiableTimeCount: identifiable.length,
+          unknownTimeCount: orders.length - identifiable.length,
+          periodStats,
+          topPeriods,
+          hasEnoughTimeData,
+          timeSummary
         };
       }
 
@@ -675,9 +882,10 @@
           panel.append(cardHeader(meta.kicker, "还没有有效订单"), element("p", "empty-copy", "完成一笔记录后，这里会轻轻接住它。"));
           return;
         }
-        panel.append(cardHeader(meta.kicker, "这一顿，已经替你记下", dateLabel(order.createdAt)));
+        panel.append(cardHeader(meta.kicker, "这一餐，已经替你记下", mealMomentLabel(order)));
         const list = element("ul", "meal-list");
         list.setAttribute("aria-label", "本餐餐品");
+        const nutritionLabel = meta.fake ? "示例营养字段" : "营养信息";
         order.items.forEach((item) => {
           const li = element("li", "meal-item");
           const line = element("div", "meal-line");
@@ -687,13 +895,22 @@
           if (isFiniteNumber(item.unitPriceCents)) line.append(element("span", "line-price", money(item.unitPriceCents * itemQuantity(item))));
           li.append(line);
           const energy = item.nutrition && item.nutrition.energyKcal;
-          if (isFiniteNumber(energy)) li.append(element("p", "item-meta", `示例营养字段 · 能量 ${number(energy * itemQuantity(item))} kcal`));
+          if (isFiniteNumber(energy)) li.append(element("p", "item-meta", `${nutritionLabel} · 能量 ${number(energy * itemQuantity(item))} kcal`));
           list.append(li);
         });
         panel.append(list);
+
+        const period = periodForOrderCreated(order);
         const message = element("div", "care-message");
-        message.append(element("p", "", "今天这顿已经记下来了。不用做最完美的选择，选一顿让自己舒服的饭就好。"));
+        if (period) {
+          const periodLine = element("p", "meal-period-label");
+          periodLine.append(element("span", "period-dot"), document.createTextNode(`${period.short} · ${period.label}`));
+          message.append(periodLine, element("p", "care-main", period.main), element("p", "care-support", period.support));
+        } else {
+          message.append(element("p", "care-main", "这一餐已经记下来了。"), element("p", "care-support", "不用做最完美的选择，选一顿让自己舒服的饭就好。"));
+        }
         panel.append(message);
+
         const totals = element("div", "totals");
         const totalRow = element("div", "total-row");
         totalRow.append(element("span", "total-label", "本单实付"), element("strong", "total-value", money(order.totalPaidCents)));
@@ -701,11 +918,47 @@
         if (isFiniteNumber(order.discountCents) || typeof order.discountLabel === "string") {
           const discount = element("div", "total-row discount-row");
           const label = typeof order.discountLabel === "string" ? order.discountLabel : "订单优惠";
-          const value = isFiniteNumber(order.discountCents) ? `已减 ${money(order.discountCents)}` : "详见示例记录";
+          const value = isFiniteNumber(order.discountCents) ? `已减 ${money(order.discountCents)}` : "优惠金额未在数据中返回";
           discount.append(element("span", "", label), element("span", "", value));
           totals.append(discount);
         }
         panel.append(totals);
+      }
+
+      function renderTimeSection(summary) {
+        const section = element("section", "section-block time-section");
+        section.append(element("h3", "section-title time-title", "这些饭落在一天的什么时候"));
+        section.append(element("p", "time-lead", "把这几顿饭轻轻放回一天里。"));
+
+        const grid = element("div", "period-grid");
+        grid.setAttribute("role", "list");
+        grid.setAttribute("aria-label", "四个点餐时段的次数与占比");
+        summary.periodStats.forEach((period) => {
+          const card = element("div", "period-card");
+          card.setAttribute("role", "listitem");
+          card.dataset.period = period.id;
+          card.setAttribute("aria-label", `${period.short}，${period.label}，${period.count} 次，占 ${percentLabel(period.share)}${period.count === 0 ? "，还没有这个小灯亮起" : ""}`);
+          const top = element("div", "period-card-top");
+          top.append(element("span", "period-short", period.short), element("span", "period-label", period.label));
+          const figure = element("div", "period-figure");
+          figure.append(element("strong", "", String(period.count)), element("span", "period-unit", "次"));
+          const share = element("span", "period-share", percentLabel(period.share));
+          const range = element("span", "period-range", period.range);
+          card.append(top, figure, share, range);
+          if (period.count === 0) card.append(element("span", "period-empty", "还没有这个小灯亮起"));
+          grid.append(card);
+        });
+        section.append(grid);
+
+        const result = element("div", "period-result");
+        result.append(element("span", "period-result-label", "最常在哪个时段吃饭"), element("p", "", summary.timeSummary));
+        section.append(result);
+
+        const noteParts = [`按可识别点餐时间的 ${summary.identifiableTimeCount} 笔有效订单统计，占比分母就是这 ${summary.identifiableTimeCount} 笔可识别订单。`];
+        if (summary.unknownTimeCount > 0) noteParts.push(`另有 ${summary.unknownTimeCount} 笔时间未知，未计入时段占比，仍计入金额与餐品统计。`);
+        else noteParts.push("这组订单中没有时间未知的记录；若有，时间未知订单不会计入时段占比。");
+        section.append(element("p", "period-note", noteParts.join(" ")));
+        return section;
       }
 
       function renderRecent() {
@@ -738,17 +991,17 @@
         const totalStat = element("div", "stat");
         totalStat.append(element("span", "stat-label", "合计实付"), element("strong", "stat-value", money(summary.totalCents)), element("span", "stat-scope", `这 ${summary.count} 笔订单合计`));
         stats.append(countStat, totalStat);
-        panel.append(stats);
+        panel.append(stats, renderTimeSection(summary));
 
         const repeatSection = element("section", "section-block");
         const repeatTitle = element("h3", "section-title", "重复出现的餐品");
-        repeatTitle.append(element("small", "", "按餐品数量计"));
+        repeatTitle.append(element("small", "", "按餐品份数计"));
         repeatSection.append(repeatTitle);
         if (summary.repeats.length) {
           const list = element("ul", "repeat-list");
           summary.repeats.forEach((item) => {
             const li = element("li", "repeat-item");
-            li.append(element("span", "repeat-name", item.name), element("span", "repeat-count", `${item.count} 次`));
+            li.append(element("span", "repeat-name", item.name), element("span", "repeat-count", `共 ${item.count} 份`));
             list.append(li);
           });
           repeatSection.append(list);
@@ -773,14 +1026,8 @@
           panel.append(nutritionSection);
         }
 
-        const message = element("div", "care-message");
-        const care = summary.repeats.length
-          ? `记录里，“${summary.repeats[0].name}”在这 ${summary.count} 笔订单中出现了 ${summary.repeats[0].count} 次。喜欢熟悉的味道，也很好。`
-          : "这些只是记录，不需要拿来评价自己。";
-        message.append(element("p", "", care));
-        panel.append(message);
         const excluded = state.data.orders.length - validOrders().length;
-        panel.append(element("p", "exclusion-note", `已排除 ${excluded} 笔非有效记录。取消、失败、退款订单均不计入；以上金额均为这 ${summary.count} 笔订单的合计，不代表月度或年度总额。`));
+        panel.append(element("p", "exclusion-note", `已排除 ${excluded} 笔非有效记录。取消、失败、退款订单均不计入；以上金额均为这 ${summary.count} 笔订单的合计，不代表月度或年度总额。时段统计按完成时间优先归类，完成时间缺失时才使用可识别点餐时间。`));
       }
 
       function setView(view, focusTab = false) {
@@ -863,25 +1110,33 @@
         ctx.beginPath();
         ctx.roundRect(x, y, width, height, radius);
       }
-      function canvasText(ctx, text, x, y, maxWidth, lineHeight) {
-        const chars = [...String(text)];
-        let line = "";
-        let cursorY = y;
-        chars.forEach((char, index) => {
-          const test = line + char;
-          if (ctx.measureText(test).width > maxWidth && line) {
-            ctx.fillText(line, x, cursorY);
-            cursorY += lineHeight;
-            line = char;
-          } else line = test;
-          if (index === chars.length - 1 && line) {
-            ctx.fillText(line, x, cursorY);
-            cursorY += lineHeight;
-          }
+      function wrapCanvasLines(ctx, text, maxWidth) {
+        const lines = [];
+        String(text).split("\n").forEach((paragraph) => {
+          if (!paragraph) { lines.push(""); return; }
+          let line = "";
+          [...paragraph].forEach((char) => {
+            const test = line + char;
+            if (ctx.measureText(test).width > maxWidth && line) {
+              lines.push(line);
+              line = char;
+            } else line = test;
+          });
+          if (line) lines.push(line);
         });
-        return cursorY;
+        return lines.length ? lines : [""];
       }
-      function canvasLine(ctx, y, width = 936) {
+
+      function canvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines = Infinity) {
+        const lines = wrapCanvasLines(ctx, text, maxWidth);
+        lines.slice(0, maxLines).forEach((line, index) => ctx.fillText(line, x, y + index * lineHeight));
+        return y + Math.min(lines.length, maxLines) * lineHeight;
+      }
+
+      function canvasTextHeight(ctx, text, maxWidth, lineHeight) {
+        return wrapCanvasLines(ctx, text, maxWidth).length * lineHeight;
+      }
+      function canvasLine(ctx, y, width = 872) {
         ctx.save();
         ctx.strokeStyle = "#e7dac9";
         ctx.setLineDash([5, 8]);
@@ -893,6 +1148,69 @@
       }
 
       const SHARE_FONT = '"PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif';
+
+      function drawSharePeriodStats(ctx, summary, startY) {
+        const font = SHARE_FONT;
+        let y = startY;
+        ctx.fillStyle = "#493b32";
+        ctx.font = `700 36px ${font}`;
+        ctx.fillText("这些饭落在一天的什么时候", 92, y);
+        y += 44;
+        ctx.fillStyle = "#806f61";
+        ctx.font = `25px ${font}`;
+        ctx.fillText("把这几顿饭轻轻放回一天里。", 92, y);
+        y += 38;
+
+        const gap = 16;
+        const cardStartX = 76;
+        const cardWidth = (904 - gap * 3) / 4;
+        const cardHeight = 218;
+        summary.periodStats.forEach((period, index) => {
+          const colors = PERIOD_COLORS[period.id];
+          const x = cardStartX + index * (cardWidth + gap);
+          const cardY = y;
+          ctx.fillStyle = colors.track;
+          roundedRect(ctx, x, cardY, cardWidth, cardHeight, 16); ctx.fill();
+          ctx.fillStyle = colors.fill;
+          roundedRect(ctx, x, cardY, cardWidth, 7, 4); ctx.fill();
+          ctx.fillStyle = colors.ink;
+          ctx.font = `700 31px ${font}`;
+          ctx.fillText(period.short, x + 17, cardY + 50);
+          ctx.fillStyle = "#806f61";
+          ctx.font = `28px ${font}`;
+          ctx.fillText(period.label, x + 17, cardY + 80);
+          ctx.fillStyle = "#493b32";
+          ctx.font = `750 46px ${font}`;
+          ctx.fillText(String(period.count), x + 17, cardY + 132);
+          const countWidth = ctx.measureText(String(period.count)).width;
+          ctx.fillStyle = "#806f61";
+          ctx.font = `23px ${font}`;
+          ctx.fillText("次", x + 21 + countWidth, cardY + 131);
+          ctx.fillStyle = "#795b46";
+          ctx.font = `650 28px ${font}`;
+          ctx.fillText(percentLabel(period.share), x + 17, cardY + 169);
+          if (period.count === 0) {
+            ctx.fillStyle = "#75665a";
+            ctx.font = `24px ${font}`;
+            ctx.fillText("小灯未亮", x + 17, cardY + 197);
+          }
+        });
+        y += cardHeight + 46;
+
+        ctx.fillStyle = "#806f61";
+        ctx.font = `27px ${font}`;
+        ctx.fillText("最常在哪个时段吃饭", 92, y);
+        y += 34;
+        ctx.fillStyle = "#604b3b";
+        ctx.font = `650 31px ${font}`;
+        y = canvasText(ctx, summary.timeSummary, 92, y, 890, 43, 3);
+        y += 8;
+        ctx.fillStyle = "#806f61";
+        ctx.font = `27px ${font}`;
+        const note = `按可识别点餐时间的 ${summary.identifiableTimeCount} 笔有效订单统计${summary.unknownTimeCount ? `；另有 ${summary.unknownTimeCount} 笔时间未知` : ""}。`;
+        y = canvasText(ctx, note, 92, y + 20, 880, 38, 3);
+        return y + 34;
+      }
 
       function paintShareCanvas(canvas) {
         const canvasHeight = canvas.height;
@@ -913,60 +1231,82 @@
         ctx.fillStyle = "#795b46";
         ctx.font = `700 30px ${font}`;
         ctx.fillText("MCD w/Work｜关怀小结", 92, 112);
-        ctx.font = `600 25px ${font}`;
+        ctx.font = `600 28px ${font}`;
         ctx.fillText(badgeText, 92, 158);
         ctx.fillStyle = "#493b32";
         ctx.font = `750 58px ${font}`;
-        const title = state.view === "meal" ? "这一顿，已经替你记下" : `最近 ${calculateSummary().count} 笔有效订单`;
+        const title = state.view === "meal" ? "这一餐，已经替你记下" : `最近 ${calculateSummary().count} 笔有效订单`;
         ctx.fillText(title, 92, 254);
         ctx.fillStyle = "#806f61";
         ctx.font = `30px ${font}`;
         ctx.fillText("只保留记录，不评价选择。", 92, 304);
 
         let y = 374;
+        const summary = calculateSummary();
+        const meta = sourceMeta();
         if (state.view === "meal") {
           const order = validOrders()[0];
-          ctx.fillStyle = "#795b46"; ctx.font = `600 28px ${font}`;
-          ctx.fillText(dateLabel(order.createdAt), 92, y); y += 42;
+          ctx.fillStyle = "#795b46";
+          ctx.font = `600 30px ${font}`;
+          y = canvasText(ctx, mealMomentLabel(order), 92, y, 890, 42, 2) + 12;
           order.items.forEach((item) => {
             canvasLine(ctx, y); y += 50;
             ctx.fillStyle = "#493b32"; ctx.font = `650 36px ${font}`;
-            y = canvasText(ctx, `${item.name} × ${itemQuantity(item)}`, 92, y, 650, 48);
+            y = canvasText(ctx, `${item.name} × ${itemQuantity(item)}`, 92, y, 640, 48);
             if (isFiniteNumber(item.unitPriceCents)) {
               ctx.fillStyle = "#795b46"; ctx.font = `34px ${font}`;
               ctx.fillText(money(item.unitPriceCents * itemQuantity(item)), 820, y - 48);
             }
             const energy = item.nutrition && item.nutrition.energyKcal;
             if (isFiniteNumber(energy)) {
-              ctx.fillStyle = "#806f61"; ctx.font = `27px ${font}`;
-              ctx.fillText(`示例营养字段 · 能量 ${number(energy * itemQuantity(item))} kcal`, 92, y + 4);
+              ctx.fillStyle = "#806f61"; ctx.font = `29px ${font}`;
+              ctx.fillText(`${meta.fake ? "示例营养字段" : "营养信息"} · 能量 ${number(energy * itemQuantity(item))} kcal`, 92, y + 4);
               y += 42;
             }
             y += 24;
           });
-          y += 12;
+
+          y += 16;
+          const period = periodForOrderCreated(order);
+          const mainCopy = period ? period.main : "这一餐已经记下来了。";
+          const supportCopy = period ? period.support : "不用做最完美的选择，选一顿让自己舒服的饭就好。";
+          ctx.font = `650 34px ${font}`;
+          const mainLines = canvasTextHeight(ctx, mainCopy, 820, 48);
+          ctx.font = `29px ${font}`;
+          const supportLines = canvasTextHeight(ctx, supportCopy, 820, 42);
+          const careHeight = 34 + (period ? 38 : 0) + mainLines + 10 + supportLines + 30;
           ctx.fillStyle = "#f8ecde";
-          roundedRect(ctx, 76, y, 904, 190, 18); ctx.fill();
-          ctx.fillStyle = "#e8b78f"; ctx.fillRect(76, y, 6, 190);
-          ctx.fillStyle = "#604b3b"; ctx.font = `32px ${font}`;
-          canvasText(ctx, "今天这顿已经记下来了。不用做最完美的选择，选一顿让自己舒服的饭就好。", 108, y + 58, 824, 50);
-          y += 240;
+          roundedRect(ctx, 76, y, 904, careHeight, 18); ctx.fill();
+          ctx.fillStyle = "#e8b78f"; ctx.fillRect(76, y, 6, careHeight);
+          let careY = y + 52;
+          if (period) {
+            ctx.fillStyle = "#795b46"; ctx.font = `700 25px ${font}`;
+            ctx.fillText(`${period.short} · ${period.label}`, 108, careY);
+            careY += 38;
+          }
+          ctx.fillStyle = "#604b3b"; ctx.font = `650 34px ${font}`;
+          careY = canvasText(ctx, mainCopy, 108, careY, 820, 48);
+          careY += 10;
+          ctx.fillStyle = "#776353"; ctx.font = `29px ${font}`;
+          canvasText(ctx, supportCopy, 108, careY, 820, 42);
+          y += careHeight + 46;
+
           ctx.fillStyle = "#806f61"; ctx.font = `30px ${font}`;
           ctx.fillText("本单实付", 92, y);
           ctx.fillStyle = "#493b32"; ctx.font = `750 58px ${font}`;
-          ctx.fillText(money(order.totalPaidCents), 760, y + 4);
-          y += 60;
+          ctx.fillText(money(order.totalPaidCents), 740, y + 4);
+          y += 52;
           if (isFiniteNumber(order.discountCents) || typeof order.discountLabel === "string") {
-            ctx.fillStyle = "#795b46"; ctx.font = `28px ${font}`;
+            ctx.fillStyle = "#795b46"; ctx.font = `27px ${font}`;
             const label = typeof order.discountLabel === "string" ? order.discountLabel : "订单优惠";
-            const value = isFiniteNumber(order.discountCents) ? `已减 ${money(order.discountCents)}` : "详见示例记录";
-            ctx.fillText(`${label} · ${value}`, 92, y);
+            const value = isFiniteNumber(order.discountCents) ? `已减 ${money(order.discountCents)}` : "优惠金额未在数据中返回";
+            y = canvasText(ctx, `${label} · ${value}`, 92, y, 880, 38, 2);
           }
+          y += 48;
+          y = drawSharePeriodStats(ctx, summary, y);
         } else {
-          const summary = calculateSummary();
           ctx.fillStyle = "#795b46"; ctx.font = `600 28px ${font}`;
-          ctx.font = `600 28px ${font}`;
-          ctx.fillText(`${sourceMeta().recentKicker} · 统计口径：这 ${summary.count} 笔订单`, 92, y); y += 44;
+          ctx.fillText(`${meta.recentKicker} · 统计口径：这 ${summary.count} 笔订单`, 92, y); y += 44;
           ctx.fillStyle = "#fbf3e9";
           roundedRect(ctx, 76, y, 440, 174, 20); ctx.fill();
           roundedRect(ctx, 540, y, 440, 174, 20); ctx.fill();
@@ -976,15 +1316,18 @@
           ctx.fillText(`${summary.count} 笔`, 104, y + 112); ctx.fillText(money(summary.totalCents), 568, y + 112);
           ctx.fillStyle = "#806f61"; ctx.font = `23px ${font}`;
           ctx.fillText(`仅这 ${summary.count} 笔订单`, 104, y + 151); ctx.fillText(`这 ${summary.count} 笔订单合计`, 568, y + 151);
-          y += 226;
+          y += 218;
+          y = drawSharePeriodStats(ctx, summary, y);
+
           ctx.fillStyle = "#493b32"; ctx.font = `700 34px ${font}`;
-          ctx.fillText("重复出现的餐品", 92, y); y += 34;
+          ctx.fillText("重复出现的餐品", 92, y); y += 40;
           const repeats = summary.repeats.slice(0, 4);
           if (repeats.length) repeats.forEach((item) => {
             canvasLine(ctx, y); y += 48;
             ctx.fillStyle = "#493b32"; ctx.font = `32px ${font}`;
-            ctx.fillText(item.name, 92, y);
-            ctx.fillStyle = "#795b46"; ctx.fillText(`${item.count} 次`, 858, y);
+            y = canvasText(ctx, item.name, 92, y, 650, 42, 1);
+            ctx.fillStyle = "#795b46"; ctx.font = `30px ${font}`;
+            ctx.fillText(`共 ${item.count} 份`, 830, y - 42);
             y += 28;
           });
           else {
@@ -998,29 +1341,20 @@
           y += 30;
           if (summary.nutrition.length) {
             ctx.fillStyle = "#493b32"; ctx.font = `700 34px ${font}`;
-            ctx.fillText("营养记录 · 仅计算已有字段", 92, y); y += 38;
-            summary.nutrition.slice(0, 4).forEach((item) => {
+            ctx.fillText("营养记录 · 仅计算已有字段", 92, y); y += 40;
+            summary.nutrition.forEach((item) => {
               canvasLine(ctx, y); y += 48;
               ctx.fillStyle = "#806f61"; ctx.font = `28px ${font}`;
               ctx.fillText(item.label, 92, y);
               ctx.fillStyle = "#795b46";
               const value = item.complete ? `${number(item.total)} ${item.unit} · 这 ${summary.count} 笔合计` : `已知 ${item.known}/${item.totalItems} 项`;
               ctx.fillText(value, 390, y);
-              y += 26;
+              y += 28;
             });
             y += 22;
           }
-          const care = summary.repeats.length
-            ? `记录里，“${summary.repeats[0].name}”出现了 ${summary.repeats[0].count} 次。喜欢熟悉的味道，也很好。`
-            : "这些只是记录，不需要拿来评价自己。";
-          const careHeight = 170;
-          ctx.fillStyle = "#f8ecde"; roundedRect(ctx, 76, y, 904, careHeight, 18); ctx.fill();
-          ctx.fillStyle = "#e8b78f"; ctx.fillRect(76, y, 6, careHeight);
-          ctx.fillStyle = "#604b3b"; ctx.font = `31px ${font}`;
-          canvasText(ctx, care, 108, y + 54, 824, 48);
-          y += careHeight + 34;
           ctx.fillStyle = "#806f61"; ctx.font = `25px ${font}`;
-          y = canvasText(ctx, `取消、失败、退款订单未计入。金额为这 ${summary.count} 笔订单合计，不代表月度或年度总额。`, 92, y, 860, 40);
+          y = canvasText(ctx, `取消、失败、退款订单未计入。金额为这 ${summary.count} 笔订单合计，不代表月度或年度总额。`, 92, y + 12, 860, 38, 2);
         }
         const contentEnd = y;
         ctx.fillStyle = "#806f61"; ctx.font = `26px ${font}`;
@@ -1031,9 +1365,9 @@
       function buildShareCanvas() {
         const canvas = document.createElement("canvas");
         canvas.width = 1080;
-        canvas.height = state.view === "recent" ? 2080 : 1720;
+        canvas.height = state.view === "recent" ? 2600 : 2200;
         const contentEnd = paintShareCanvas(canvas);
-        const height = Math.min(2600, Math.max(state.view === "recent" ? 1480 : 1240, Math.ceil(contentEnd + 150)));
+        const height = Math.max(state.view === "recent" ? 1480 : 1240, Math.ceil(contentEnd + 150));
         if (height !== canvas.height) {
           canvas.height = height;
           paintShareCanvas(canvas);
@@ -1087,7 +1421,14 @@
         });
       });
       $("#export-button").addEventListener("click", exportPng);
-      window.careSummaryDemo = { buildShareCanvas, calculateSummary, getData: () => state.data };
+      window.careSummaryDemo = {
+        buildShareCanvas,
+        calculateSummary,
+        getData: () => state.data,
+        parseOrderTimestamp,
+        periodForTimestamp,
+        periods: MEAL_PERIODS.map(({ id, label, short, range }) => ({ id, label, short, range }))
+      };
       $("#import-button").addEventListener("click", () => $("#json-input").click());
       $("#json-input").addEventListener("change", (event) => { if (event.target.files[0]) importJson(event.target.files[0]); });
 

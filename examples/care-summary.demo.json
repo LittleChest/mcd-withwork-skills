@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "demo": true,
+  "label": "交互演示 · 示例数据非实时",
+  "currency": "CNY",
+  "orders": [
+    {
+      "id": "DEMO-001",
+      "createdAt": "2026-10-24T08:12:00+08:00",
+      "completedAt": "2026-10-24T08:34:00+08:00",
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 3900,
+      "discountCents": 800,
+      "discountLabel": "示例套餐优惠",
+      "items": [
+        {
+          "name": "炙烤鸡肉堡",
+          "quantity": 1,
+          "unitPriceCents": 2200,
+          "nutrition": { "energyKcal": 428, "proteinG": 24, "fatG": 15, "carbsG": 48, "sodiumMg": 690, "calciumMg": 82 }
+        },
+        {
+          "name": "金黄小薯",
+          "quantity": 1,
+          "unitPriceCents": 1200,
+          "nutrition": { "energyKcal": 236, "proteinG": 3, "fatG": 11, "carbsG": 31, "sodiumMg": 180, "calciumMg": 12 }
+        },
+        {
+          "name": "热红茶",
+          "quantity": 1,
+          "unitPriceCents": 500,
+          "nutrition": { "energyKcal": 0, "proteinG": 0, "fatG": 0, "carbsG": 0, "sodiumMg": 0, "calciumMg": 4 }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-002",
+      "createdAt": "2026-10-22T12:35:00+08:00",
+      "completedAt": "2026-10-22T13:02:00+08:00",
+      "status": "completed",
+      "fulfillment": "delivery",
+      "totalPaidCents": 3200,
+      "discountCents": 500,
+      "discountLabel": "示例满减",
+      "items": [
+        {
+          "name": "炙烤鸡肉堡",
+          "quantity": 1,
+          "unitPriceCents": 2200,
+          "nutrition": { "energyKcal": 428, "proteinG": 24, "fatG": 15, "carbsG": 48, "sodiumMg": 690, "calciumMg": 82 }
+        },
+        {
+          "name": "玉米粒杯",
+          "quantity": 1,
+          "unitPriceCents": 1000,
+          "nutrition": { "energyKcal": 96, "proteinG": 3, "fatG": 1, "carbsG": 20, "sodiumMg": 85, "calciumMg": 8 }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-003",
+      "createdAt": "2026-10-21T18:10:00+08:00",
+      "status": "cancelled",
+      "fulfillment": "pickup",
+      "totalPaidCents": 9900,
+      "items": [
+        { "name": "不应计入的餐品", "quantity": 3, "unitPriceCents": 3300 }
+      ]
+    },
+    {
+      "id": "DEMO-004",
+      "createdAt": "2026-10-20T18:20:00+08:00",
+      "completedAt": "2026-10-20T18:48:00+08:00",
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 3000,
+      "items": [
+        {
+          "name": "蘑菇牛肉堡",
+          "quantity": 1,
+          "unitPriceCents": 2400,
+          "nutrition": { "energyKcal": 462, "proteinG": 25, "fatG": 19, "carbsG": 46, "sodiumMg": 720, "calciumMg": 110 }
+        },
+        {
+          "name": "热红茶",
+          "quantity": 1,
+          "unitPriceCents": 600,
+          "nutrition": { "energyKcal": 0, "proteinG": 0, "fatG": 0, "carbsG": 0, "sodiumMg": 0, "calciumMg": 4 }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-005",
+      "createdAt": "2026-10-19T12:05:00+08:00",
+      "status": "failed",
+      "fulfillment": "delivery",
+      "totalPaidCents": 8800,
+      "items": [
+        { "name": "失败订单餐品", "quantity": 2, "unitPriceCents": 4400 }
+      ]
+    },
+    {
+      "id": "DEMO-006",
+      "createdAt": "2026-10-18T22:47:00+08:00",
+      "completedAt": "2026-10-18T23:05:00+08:00",
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 4100,
+      "discountCents": 300,
+      "discountLabel": "示例组合优惠",
+      "items": [
+        {
+          "name": "炙烤鸡肉堡",
+          "quantity": 1,
+          "unitPriceCents": 2200,
+          "nutrition": { "energyKcal": 428, "proteinG": 24, "fatG": 15, "carbsG": 48, "sodiumMg": 690, "calciumMg": 82 }
+        },
+        {
+          "name": "金黄小薯",
+          "quantity": 1,
+          "unitPriceCents": 1200,
+          "nutrition": { "energyKcal": 236, "proteinG": 3, "fatG": 11, "carbsG": 31, "sodiumMg": 180, "calciumMg": 12 }
+        },
+        {
+          "name": "冰柠檬茶",
+          "quantity": 1,
+          "unitPriceCents": 700,
+          "nutrition": null
+        }
+      ]
+    },
+    {
+      "id": "DEMO-007",
+      "createdAt": "2026-10-17T19:25:00+08:00",
+      "status": "refunded",
+      "fulfillment": "delivery",
+      "totalPaidCents": 7600,
+      "items": [
+        { "name": "退款订单餐品", "quantity": 2, "unitPriceCents": 3800 }
+      ]
+    },
+    {
+      "id": "DEMO-008",
+      "createdAt": "2026-10-16T07:55:00+08:00",
+      "completedAt": "2026-10-16T08:22:00+08:00",
+      "status": "completed",
+      "fulfillment": "delivery",
+      "totalPaidCents": 2900,
+      "items": [
+        {
+          "name": "蘑菇牛肉堡",
+          "quantity": 1,
+          "unitPriceCents": 2400,
+          "nutrition": { "energyKcal": 462, "proteinG": 25, "fatG": 19, "carbsG": 46, "sodiumMg": 720, "calciumMg": 110 }
+        },
+        {
+          "name": "热红茶",
+          "quantity": 1,
+          "unitPriceCents": 500,
+          "nutrition": { "energyKcal": 0, "proteinG": 0, "fatG": 0, "carbsG": 0, "sodiumMg": 0, "calciumMg": 4 }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-009",
+      "createdAt": "2026-10-14T16:40:00+08:00",
+      "completedAt": "2026-10-14T17:02:00+08:00",
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 3400,
+      "discountCents": 400,
+      "discountLabel": "示例套餐优惠",
+      "items": [
+        {
+          "name": "炙烤鸡肉堡",
+          "quantity": 1,
+          "unitPriceCents": 2200,
+          "nutrition": { "energyKcal": 428, "proteinG": 24, "fatG": 15, "carbsG": 48, "sodiumMg": 690, "calciumMg": 82 }
+        },
+        {
+          "name": "苹果片",
+          "quantity": 1,
+          "unitPriceCents": 800,
+          "nutrition": { "energyKcal": 42, "proteinG": 0, "fatG": 0, "carbsG": 11, "sodiumMg": 1, "calciumMg": 5 }
+        },
+        {
+          "name": "热红茶",
+          "quantity": 1,
+          "unitPriceCents": 400,
+          "nutrition": { "energyKcal": 0, "proteinG": 0, "fatG": 0, "carbsG": 0, "sodiumMg": 0, "calciumMg": 4 }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-010",
+      "createdAt": "2026-10-12T06:30:00+08:00",
+      "completedAt": "2026-10-12T06:55:00+08:00",
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 2700,
+      "items": [
+        {
+          "name": "金黄小薯",
+          "quantity": 1,
+          "unitPriceCents": 1200,
+          "nutrition": { "energyKcal": 236, "proteinG": 3, "fatG": 11, "carbsG": 31, "sodiumMg": 180, "calciumMg": 12 }
+        },
+        {
+          "name": "冰柠檬茶",
+          "quantity": 1,
+          "unitPriceCents": 700,
+          "nutrition": { "energyKcal": 118, "proteinG": 0, "fatG": 0, "carbsG": 29, "sodiumMg": 12, "calciumMg": 6 }
+        },
+        {
+          "name": "苹果片",
+          "quantity": 1,
+          "unitPriceCents": 800,
+          "nutrition": { "energyKcal": 42, "proteinG": 0, "fatG": 0, "carbsG": 11, "sodiumMg": 1, "calciumMg": 5 }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-011",
+      "createdAt": null,
+      "completedAt": null,
+      "status": "completed",
+      "fulfillment": "pickup",
+      "totalPaidCents": 1500,
+      "items": [
+        {
+          "name": "苹果片",
+          "quantity": 1,
+          "unitPriceCents": 1500,
+          "nutrition": null
+        }
+      ]
+    }
+  ]
+}
